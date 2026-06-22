@@ -20,9 +20,7 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: npm
 
-      # `npm install` (not `npm ci`) so platform-specific optional native deps
-      # resolve for the Linux runner regardless of where the lockfile was made.
-      - run: npm install --no-audit --no-fund
+      - run: npm ci
 
       - name: Build library
         run: npm run build:lib
