@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { errorIllustrations } from "./errorIllustrations";
 
 export type ErrorType =
   | "not-found"
@@ -7,30 +8,26 @@ export type ErrorType =
   | "server-down"
   | "server-error";
 
-// Per-type illustration + default copy (overridable via props/children).
-const CONFIG: Record<ErrorType, { image: string; title: string; text: string }> = {
+// Per-type default copy (overridable via props/children). Illustrations are
+// inlined from ./errorIllustrations so the component ships its own artwork.
+const CONFIG: Record<ErrorType, { title: string; text: string }> = {
   "not-found": {
-    image: "/images/not-found.svg",
     title: "Page not found",
     text: "We're sorry, the page you were looking for could not be found. It may have moved or the address may be mistyped. Follow home page link below.",
   },
   "access-denied": {
-    image: "/images/denied.svg",
     title: "Access denied",
     text: "You are trying to view a page you are not allowed to see. If you are not logged in, log in. Otherwise, check that your account should be able to view it.",
   },
   "server-maintenance": {
-    image: "/images/server-maintenance.svg",
     title: "Server maintenance",
     text: "The server is undergoing scheduled maintenance. Check back later.",
   },
   "server-down": {
-    image: "/images/server-down.svg",
     title: "Server down",
     text: "The application has run into problems and is not working as it should at the moment. We are aware of the error and will do our best to get it working again.",
   },
   "server-error": {
-    image: "/images/server-error.svg",
     title: "Server error",
     text: "We're sorry, an unexpected error has occurred and it has been logged. We will try to fix it as soon as possible.",
   },
@@ -84,10 +81,11 @@ export const ErrorPage = ({
             </a>
           )}
         </div>
-        <div className="text-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={cfg.image} alt="" className="mx-auto max-w-full" />
-        </div>
+        <div
+          className="mx-auto w-full max-w-[384px] text-center [&_svg]:h-auto [&_svg]:w-full"
+          aria-hidden="true"
+          dangerouslySetInnerHTML={{ __html: errorIllustrations[type] }}
+        />
       </div>
     </div>
   );
