@@ -27,8 +27,11 @@ jobs:
           node-version: 22
           cache: npm
 
+      # `npm install` (not `npm ci`) so platform-specific optional native deps
+      # (lightningcss / @tailwindcss/oxide) resolve for the Linux runner even
+      # though the lockfile was generated on another OS.
       - name: Install
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build library
         run: npm run build:lib
