@@ -6,7 +6,7 @@ package, documented with a live docs site and Storybook.
 ## Monorepo layout
 
 ```
-packages/ui     → @confect/vud-components (the published library + Storybook)
+packages/ui     → @confect-development/vud-components (the published library + Storybook)
 apps/docs       → the docs site (Next.js static export)
 .github/workflows
   pages.yml     → builds & deploys docs + Storybook to GitHub Pages
@@ -31,7 +31,7 @@ npm install
 | `npm run build:all` | All three of the above |
 | `npm run typecheck` | Typecheck every workspace |
 
-## The library — `@confect/vud-components`
+## The library — `@confect-development/vud-components`
 
 Built with `tsc` (preserving per-file `"use client"` boundaries) plus the Tailwind CLI, which
 scans the built JS and emits a single `styles.css` (utilities + global component CSS). See
@@ -53,10 +53,10 @@ the repo name automatically. For a **user/org** site or a **custom domain**, set
 
 ## Publishing to npm
 
-`.github/workflows/publish.yml` publishes `@confect/vud-components` when you create a GitHub
+`.github/workflows/publish.yml` publishes `@confect-development/vud-components` when you create a GitHub
 Release. Add an `NPM_TOKEN` repo secret with publish rights first. To publish manually:
 
 ```bash
 npm run build:lib
-npm publish --access public -w @confect/vud-components
+npm publish --access public -w @confect-development/vud-components
 ```

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "@confect/vud-components";
-import { Button } from "@confect/vud-components";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "@confect-development/vud-components";
+import { Button } from "@confect-development/vud-components";
 
 /** Client-side trigger + modal, for the server-rendered home showcase. */
 export const ModalExample = () => {

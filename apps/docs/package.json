@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@confect/vud-components": "*",
+    "@confect-development/vud-components": "*",
     "@vismaux/vud-icons": "^1.8.4-beta.1",
     "next": "16.2.9",
     "react": "19.2.4",

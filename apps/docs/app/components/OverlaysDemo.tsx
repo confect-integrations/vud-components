@@ -1,8 +1,8 @@
 "use client";
-import { Dropdown, DropdownItem, DropdownDivider } from "@confect/vud-components";
-import { Tooltip } from "@confect/vud-components";
-import { ToastProvider, useToast } from "@confect/vud-components";
-import { Button } from "@confect/vud-components";
+import { Dropdown, DropdownItem, DropdownDivider } from "@confect-development/vud-components";
+import { Tooltip } from "@confect-development/vud-components";
+import { ToastProvider, useToast } from "@confect-development/vud-components";
+import { Button } from "@confect-development/vud-components";
 
 const ToastButtons = () => {
   const toast = useToast();

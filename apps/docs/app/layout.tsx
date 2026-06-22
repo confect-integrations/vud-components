@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "@confect/vud-components/styles.css";
+import "@confect-development/vud-components/styles.css";
 import "@vismaux/vud-icons/dist/css/vud-icons.min.css";
 
 const geistSans = Geist({

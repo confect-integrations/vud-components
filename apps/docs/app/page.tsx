@@ -31,7 +31,7 @@ import {
   FormGroup,
   Input,
   ErrorPage,
-} from "@confect/vud-components";
+} from "@confect-development/vud-components";
 import { DrawerExample } from "./components/DrawerExample";
 import { ModalExample } from "./components/ModalExample";
 import { OverlaysDemo } from "./components/OverlaysDemo";

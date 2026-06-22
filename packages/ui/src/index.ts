@@ -1,4 +1,4 @@
-// Auto-generated barrel — public API of @confect/vud-components
+// Auto-generated barrel — public API of @confect-development/vud-components
 export * from "./Alert";
 export * from "./Badge";
 export * from "./Button";

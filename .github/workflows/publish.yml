@@ -1,4 +1,4 @@
-name: Publish @confect/vud-components to npm
+name: Publish @confect-development/vud-components to npm
 
 on:
   release:
@@ -27,6 +27,6 @@ jobs:
 
       # Requires an NPM_TOKEN repo secret with publish rights.
       - name: Publish
-        run: npm publish --access public -w @confect/vud-components
+        run: npm publish --access public -w @confect-development/vud-components
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

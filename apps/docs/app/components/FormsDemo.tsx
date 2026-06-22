@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Checkbox } from "@confect/vud-components";
-import { Input } from "@confect/vud-components";
-import { TextArea } from "@confect/vud-components";
-import { Search } from "@confect/vud-components";
-import { Combobox } from "@confect/vud-components";
-import { Switch } from "@confect/vud-components";
-import { RadioGroup } from "@confect/vud-components";
-import { Select } from "@confect/vud-components";
+import { Checkbox } from "@confect-development/vud-components";
+import { Input } from "@confect-development/vud-components";
+import { TextArea } from "@confect-development/vud-components";
+import { Search } from "@confect-development/vud-components";
+import { Combobox } from "@confect-development/vud-components";
+import { Switch } from "@confect-development/vud-components";
+import { RadioGroup } from "@confect-development/vud-components";
+import { Select } from "@confect-development/vud-components";
 
 const options = Array.from({ length: 8 }, (_, i) => ({ key: i + 1, text: `item${i}` }));
 const countries = [

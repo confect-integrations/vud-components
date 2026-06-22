@@ -7,12 +7,12 @@
     "apps/*"
   ],
   "scripts": {
-    "build:lib": "npm run build -w @confect/vud-components",
+    "build:lib": "npm run build -w @confect-development/vud-components",
     "build:docs": "npm run build -w docs",
-    "build:storybook": "npm run build-storybook -w @confect/vud-components",
+    "build:storybook": "npm run build-storybook -w @confect-development/vud-components",
     "build:all": "npm run build:lib && npm run build:docs && npm run build:storybook",
     "dev:docs": "npm run dev -w docs",
-    "storybook": "npm run storybook -w @confect/vud-components",
+    "storybook": "npm run storybook -w @confect-development/vud-components",
     "typecheck": "npm run typecheck --workspaces --if-present"
   }
 }

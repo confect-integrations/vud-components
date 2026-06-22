@@ -1,4 +1,4 @@
-/* Stylesheet entry for @confect/vud-components.
+/* Stylesheet entry for @confect-development/vud-components.
    Tailwind scans the built JS for the utility classes the components use, then
    appends the global component CSS. Icons are a separate import — see README. */
 @import "tailwindcss" source(none);
