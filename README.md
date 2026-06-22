@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VUD Components
 
-## Getting Started
+A React + Tailwind recreation of the **Visma Unified Design** system — published as an npm
+package, documented with a live docs site and Storybook.
 
-First, run the development server:
+## Monorepo layout
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+packages/ui     → @confect/vud-components (the published library + Storybook)
+apps/docs       → the docs site (Next.js static export)
+.github/workflows
+  pages.yml     → builds & deploys docs + Storybook to GitHub Pages
+  publish.yml   → publishes the library to npm on release
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This is an npm workspaces monorepo. Install everything from the root:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts (run from the repo root)
 
-## Learn More
+| Command | What it does |
+| --- | --- |
+| `npm run dev:docs` | Run the docs site locally (Next dev) |
+| `npm run storybook` | Run Storybook locally on :6006 |
+| `npm run build:lib` | Build the library to `packages/ui/dist` (JS + types + `styles.css`) |
+| `npm run build:docs` | Static-export the docs site to `apps/docs/out` |
+| `npm run build:storybook` | Build Storybook to `packages/ui/storybook-static` |
+| `npm run build:all` | All three of the above |
+| `npm run typecheck` | Typecheck every workspace |
 
-To learn more about Next.js, take a look at the following resources:
+## The library — `@confect/vud-components`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Built with `tsc` (preserving per-file `"use client"` boundaries) plus the Tailwind CLI, which
+scans the built JS and emits a single `styles.css` (utilities + global component CSS). See
+[`packages/ui/README.md`](packages/ui/README.md) for installation and usage.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Hosting (GitHub Pages)
 
-## Deploy on Vercel
+`.github/workflows/pages.yml` builds the library, Storybook and the docs on every push to
+`main`, then publishes one Pages site:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **`/`** — the docs site
+- **`/storybook`** — Storybook
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For a **project** Pages site (`user.github.io/<repo>`), the workflow sets the docs base path to
+the repo name automatically. For a **user/org** site or a **custom domain**, set
+`NEXT_PUBLIC_BASE_PATH` to `""` in the workflow.
+
+> One-time setup: in the repo **Settings → Pages**, set the source to **GitHub Actions**.
+
+## Publishing to npm
+
+`.github/workflows/publish.yml` publishes `@confect/vud-components` when you create a GitHub
+Release. Add an `NPM_TOKEN` repo secret with publish rights first. To publish manually:
+
+```bash
+npm run build:lib
+npm publish --access public -w @confect/vud-components
+```

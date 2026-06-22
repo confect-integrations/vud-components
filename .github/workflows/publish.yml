@@ -1,0 +1,32 @@
+name: Publish @confect/vud-components to npm
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build library
+        run: npm run build:lib
+
+      # Requires an NPM_TOKEN repo secret with publish rights.
+      - name: Publish
+        run: npm publish --access public -w @confect/vud-components
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

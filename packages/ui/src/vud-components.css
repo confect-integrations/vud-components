@@ -1,0 +1,347 @@
+/* Global component styles that can't be expressed as Tailwind utilities
+   (pseudo-elements, keyframes, :has(), complex selectors). Prefixed with
+   `vud-` to avoid collisions. Shipped as part of the package's styles.css. */
+
+/* ===== Button — arrow-tab "direction" shape ===== */
+.vud-btn-direction {
+  position: relative;
+  isolation: isolate;
+  --arrow: 0.75rem; /* depth of the point */
+  filter: drop-shadow(0 2px 3px rgba(37, 38, 38, 0.12));
+}
+.vud-btn-direction::before,
+.vud-btn-direction::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  clip-path: polygon(var(--arrow) 0, 100% 0, 100% 100%, var(--arrow) 100%, 0 50%);
+}
+.vud-btn-direction::before {
+  inset: 0;
+  background: var(--btn-border);
+}
+.vud-btn-direction::after {
+  inset: 1px;
+  background: var(--btn-surface);
+}
+.vud-btn-direction-right::before,
+.vud-btn-direction-right::after {
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--arrow)) 0,
+    100% 50%,
+    calc(100% - var(--arrow)) 100%,
+    0 100%
+  );
+}
+
+/* ===== Icon — pin the box to an explicit pixel size ===== */
+.vud-icon {
+  vertical-align: middle;
+}
+.vud-icon::before {
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+}
+
+/* ===== Horizontal loading bar — indeterminate sweep ===== */
+.vud-hlb-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  width: 0;
+  border-radius: inherit;
+  background-color: #1482cc;
+  animation: vud-hlb-sweep 2s linear infinite;
+}
+@keyframes vud-hlb-sweep {
+  0% {
+    left: 0%;
+    right: 100%;
+    width: 0%;
+  }
+  10% {
+    left: 0%;
+    right: 75%;
+    width: 25%;
+  }
+  90% {
+    left: 75%;
+    right: 0%;
+    width: 25%;
+  }
+  100% {
+    left: 100%;
+    right: 0%;
+    width: 0%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vud-hlb-bar {
+    animation: none;
+    left: 37.5%;
+    right: 37.5%;
+    width: 25%;
+  }
+}
+
+/* ===== Table — zebra rows + dotted column dividers ===== */
+.vud-table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: separate;
+  border: 1px solid #dadada;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(37, 38, 38, 0.08);
+  color: #252626;
+  text-align: left;
+  font-size: 14px;
+}
+.vud-table th,
+.vud-table td {
+  padding: 0 16px;
+  vertical-align: middle;
+  background-color: #fff;
+  background-image: linear-gradient(to bottom, #8a8a8a 10%, transparent 0);
+  background-position: right;
+  background-size: 1px 6px;
+  background-repeat: repeat-y;
+}
+.vud-table th:last-child,
+.vud-table td:last-child {
+  background-image: none;
+}
+.vud-table thead th,
+.vud-table thead td {
+  height: 48px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-weight: 600;
+  border-bottom: 1px solid #dadada;
+}
+.vud-table tbody th,
+.vud-table tbody td {
+  position: relative;
+  height: 40px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-weight: 400;
+}
+.vud-table tbody tr:nth-child(odd) th,
+.vud-table tbody tr:nth-child(odd) td {
+  background-color: #f2f2f2;
+}
+.vud-table-condensed tbody th,
+.vud-table-condensed tbody td {
+  height: 32px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.vud-table-hover tbody tr,
+.vud-table-active tbody tr {
+  cursor: pointer;
+}
+.vud-table-hover tbody tr:hover th,
+.vud-table-hover tbody tr:hover td,
+.vud-table-active tbody tr:hover th,
+.vud-table-active tbody tr:hover td {
+  background-color: #d2eafa;
+}
+.vud-table tbody tr.vud-table-row-hover:hover th,
+.vud-table tbody tr.vud-table-row-hover:hover td {
+  background-color: #d2eafa;
+}
+.vud-table tbody tr.vud-table-row-active th,
+.vud-table tbody tr.vud-table-row-active td {
+  background-color: #f2f2f2;
+  border-top: 1px solid #8a8a8a;
+  border-bottom: 1px solid #8a8a8a;
+}
+.vud-table-responsive {
+  width: 100%;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+.vud-table-responsive .vud-table {
+  margin-bottom: 0;
+}
+
+/* ===== Wizard — interlocking arrow-tab steps ===== */
+.vud-wizard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.vud-wizard-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  cursor: pointer;
+  flex: 1;
+  height: 48px;
+  padding: 12px 16px 12px 32px;
+  color: #252626;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: #8a8a8a transparent;
+  background-color: #fff;
+  outline: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.vud-wizard-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vud-wizard-check {
+  flex-shrink: 0;
+  color: #316245;
+}
+.vud-wizard-item::before,
+.vud-wizard-item::after {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 28px;
+  height: 28px;
+  top: 9px;
+  border-width: 1px 1px 0 0;
+  border-style: solid;
+  border-color: transparent;
+  transform: rotate(45deg) skew(11deg, 11deg);
+}
+.vud-wizard-item::before {
+  left: -14px;
+  background-color: transparent;
+}
+.vud-wizard-item::after {
+  right: -14px;
+  border-color: #8a8a8a;
+  background-color: #fff;
+}
+.vud-wizard-item:first-child {
+  border-left: 1px solid #8a8a8a;
+}
+.vud-wizard-item:first-child::before {
+  display: none;
+}
+.vud-wizard-item:last-child {
+  border-right: 1px solid #8a8a8a;
+  z-index: 1;
+}
+.vud-wizard-item:last-child::after {
+  display: none;
+}
+.vud-wizard-item:nth-last-child(2) { z-index: 2; }
+.vud-wizard-item:nth-last-child(3) { z-index: 3; }
+.vud-wizard-item:nth-last-child(4) { z-index: 4; }
+.vud-wizard-item:nth-last-child(5) { z-index: 5; }
+.vud-wizard-item:nth-last-child(6) { z-index: 6; }
+.vud-wizard-item:nth-last-child(7) { z-index: 7; }
+.vud-wizard-item:nth-last-child(8) { z-index: 8; }
+.vud-wizard-item:nth-last-child(9) { z-index: 9; }
+.vud-wizard-item:nth-last-child(10) { z-index: 10; }
+.vud-wizard-item:nth-last-child(11) { z-index: 11; }
+.vud-wizard-item:nth-last-child(12) { z-index: 12; }
+.vud-wizard-item:hover {
+  border-color: #1482cc transparent;
+  background-color: #d2eafa;
+}
+.vud-wizard-item:hover::after {
+  border-color: #1482cc;
+  background-color: #d2eafa;
+}
+.vud-wizard-item:has(+ .vud-wizard-item:hover)::after {
+  border-color: #1482cc;
+}
+.vud-wizard-active,
+.vud-wizard-visited {
+  pointer-events: none;
+  cursor: default;
+  border-color: #316245 transparent;
+  background-color: #f2f2f2;
+}
+.vud-wizard-active::after,
+.vud-wizard-visited::after {
+  border-color: #316245;
+  background-color: #f2f2f2;
+}
+.vud-wizard-item:has(+ .vud-wizard-active):not(:hover)::after,
+.vud-wizard-item:has(+ .vud-wizard-visited):not(:hover)::after {
+  border-color: #316245;
+}
+.vud-wizard-active:first-child,
+.vud-wizard-visited:first-child {
+  border-left-color: #316245;
+}
+.vud-wizard-active:last-child,
+.vud-wizard-visited:last-child {
+  border-right-color: #316245;
+}
+.vud-wizard-disabled {
+  pointer-events: none;
+  cursor: default;
+  color: #8a8a8a;
+}
+.vud-wizard-hidden {
+  display: none;
+}
+.vud-wizard-dropdown {
+  justify-content: center;
+  padding: 12px 16px;
+}
+.vud-wizard-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 60;
+  min-width: 180px;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(37, 38, 38, 0.12);
+}
+.vud-wizard-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #252626;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.vud-wizard-menu-item:hover {
+  background: #d2eafa;
+}
+.vud-wizard-menu-disabled {
+  color: #8a8a8a;
+  pointer-events: none;
+  cursor: default;
+}
