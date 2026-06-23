@@ -1,7 +1,48 @@
 # VUD Components
 
-A React + Tailwind recreation of the **Visma Unified Design** system — published as an npm
-package, documented with a live docs site and Storybook.
+A React + Tailwind recreation of the **Visma Unified Design** (VUD) system — published as an
+npm package, with a live docs site and Storybook.
+
+[![npm version](https://img.shields.io/npm/v/@confect-development/vud-components.svg)](https://www.npmjs.com/package/@confect-development/vud-components)
+
+- 📦 **npm** — https://www.npmjs.com/package/@confect-development/vud-components
+- 📖 **Docs** — https://confect-integrations.github.io/vud-components/
+- 🧩 **Storybook** — https://confect-integrations.github.io/vud-components/storybook/
+
+## Installation
+
+```bash
+npm install @confect-development/vud-components
+```
+
+Peer dependencies: `react` and `react-dom` (v18 or v19).
+
+## Usage
+
+Import components by name and the stylesheet once (e.g. in your root layout):
+
+```tsx
+import { Button, Modal } from "@confect-development/vud-components";
+import "@confect-development/vud-components/styles.css";
+
+export default function App() {
+  return <Button variant="primary">Save</Button>;
+}
+```
+
+Most components ship their own inline icons. The general-purpose `Icon` component additionally
+needs the VUD icon CSS:
+
+```ts
+import "@vismaux/vud-icons/dist/css/vud-icons.min.css";
+```
+
+> **Using Tailwind in your app?** The package ships precompiled Tailwind utilities inside
+> `styles.css`. Import it **before** your own Tailwind entry (e.g. `globals.css`) so your app's
+> responsive variants (`lg:`, `md:`, …) win the cascade.
+
+The components are server-friendly: per-file `"use client"` boundaries are preserved, so they
+work in Next.js App Router (Server Components) and any React 18/19 app.
 
 ## Monorepo layout
 
@@ -10,7 +51,7 @@ packages/ui     → @confect-development/vud-components (the published library +
 apps/docs       → the docs site (Next.js static export)
 .github/workflows
   pages.yml     → builds & deploys docs + Storybook to GitHub Pages
-  publish.yml   → publishes the library to npm on release
+  publish.yml   → publishes the library to npm on a version tag
 ```
 
 This is an npm workspaces monorepo. Install everything from the root:
@@ -31,11 +72,12 @@ npm install
 | `npm run build:all` | All three of the above |
 | `npm run typecheck` | Typecheck every workspace |
 
-## The library — `@confect-development/vud-components`
+## How the library is built
 
-Built with `tsc` (preserving per-file `"use client"` boundaries) plus the Tailwind CLI, which
-scans the built JS and emits a single `styles.css` (utilities + global component CSS). See
-[`packages/ui/README.md`](packages/ui/README.md) for installation and usage.
+`tsc` compiles the source (preserving per-file `"use client"` boundaries 1:1 — no bundler),
+then the Tailwind CLI scans the built JS and emits a single `styles.css` containing the
+utilities plus the global, prefixed component CSS. See
+[`packages/ui/README.md`](packages/ui/README.md) for the consumer-facing reference.
 
 ## Hosting (GitHub Pages)
 
@@ -53,8 +95,22 @@ the repo name automatically. For a **user/org** site or a **custom domain**, set
 
 ## Publishing to npm
 
-`.github/workflows/publish.yml` publishes `@confect-development/vud-components` when you create a GitHub
-Release. Add an `NPM_TOKEN` repo secret with publish rights first. To publish manually:
+`.github/workflows/publish.yml` publishes `@confect-development/vud-components` when you push a
+`v*.*.*` tag:
+
+```bash
+# bump packages/ui/package.json (and the lockfile), then tag and push
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+You can also trigger it manually from the **Actions** tab (`workflow_dispatch`).
+
+Either way it needs an `NPM_TOKEN` repo secret (**Settings → Secrets and variables → Actions**)
+holding a **granular access token** with read/write to the package **and "Bypass two-factor
+authentication" enabled at token creation** — otherwise the publish fails with a 2FA error.
+
+To publish from your machine instead:
 
 ```bash
 npm run build:lib

@@ -26,6 +26,10 @@ export function Example() {
 That's all most apps need — alerts, buttons, forms, etc. ship their own inline
 SVG icons, so they render with no extra setup.
 
+> **Using Tailwind in your app?** `styles.css` contains precompiled Tailwind utilities.
+> Import it **before** your own Tailwind entry (e.g. `globals.css`) so your app's responsive
+> variants (`lg:`, `md:`, …) win the cascade over the library's base utilities.
+
 ### The general-purpose `Icon` component
 
 `<Icon name="…" />` renders any icon from the VUD set, which lives in the
