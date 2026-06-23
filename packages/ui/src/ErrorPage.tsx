@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { errorIllustrations } from "./errorIllustrations";
 
 export type ErrorType =
   | "not-found"
@@ -8,8 +7,7 @@ export type ErrorType =
   | "server-down"
   | "server-error";
 
-// Per-type default copy (overridable via props/children). Illustrations are
-// inlined from ./errorIllustrations so the component ships its own artwork.
+// Per-type default copy (overridable via props/children).
 const CONFIG: Record<ErrorType, { title: string; text: string }> = {
   "not-found": {
     title: "Page not found",
@@ -47,7 +45,7 @@ export type ErrorPageProps = {
   className?: string;
 };
 
-/** Full-bleed error page: copy + CTA on the left, illustration on the right. */
+/** Centered error page: a heading, message and call-to-action button. */
 export const ErrorPage = ({
   type,
   title,
@@ -66,26 +64,19 @@ export const ErrorPage = ({
         .filter(Boolean)
         .join(" ")}
     >
-      <div className="grid items-center gap-10 md:grid-cols-2">
-        <div className="max-w-md">
-          <h1 className="mb-8 text-[32px] font-normal leading-none text-[#252626]">
-            {title ?? cfg.title}
-          </h1>
-          <div className="mb-8 leading-[1.8] text-[#252626]">{children ?? cfg.text}</div>
-          {buttonCaption && (
-            <a
-              href={redirectUrl}
-              className="inline-flex h-9 items-center justify-center rounded-lg border border-[#2d7048] bg-[#2d7048] px-4 text-sm text-white shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] transition-colors hover:border-[#28633f] hover:bg-[#28633f]"
-            >
-              {buttonCaption}
-            </a>
-          )}
-        </div>
-        <div
-          className="mx-auto w-full max-w-[384px] text-center [&_svg]:h-auto [&_svg]:w-full"
-          aria-hidden="true"
-          dangerouslySetInnerHTML={{ __html: errorIllustrations[type] }}
-        />
+      <div className="mx-auto max-w-lg text-center">
+        <h1 className="mb-8 text-[32px] font-normal leading-none text-[#252626]">
+          {title ?? cfg.title}
+        </h1>
+        <div className="mb-8 leading-[1.8] text-[#252626]">{children ?? cfg.text}</div>
+        {buttonCaption && (
+          <a
+            href={redirectUrl}
+            className="inline-flex h-9 items-center justify-center rounded-lg border border-[#2d7048] bg-[#2d7048] px-4 text-sm text-white shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] transition-colors hover:border-[#28633f] hover:bg-[#28633f]"
+          >
+            {buttonCaption}
+          </a>
+        )}
       </div>
     </div>
   );
