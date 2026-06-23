@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
 
-export type ButtonVariant = "default" | "primary" | "link";
+export type ButtonVariant = "default" | "primary" | "secondary" | "danger" | "link";
 export type ButtonSize = "md" | "lg";
 
 type ButtonProps = {
@@ -10,6 +10,8 @@ type ButtonProps = {
   size?: ButtonSize;
   /** Stretch to fill the container width. */
   block?: boolean;
+  /** Show a spinner, disable interaction and keep the label (for async actions). */
+  loading?: boolean;
   /** Render as an arrow-tab pointing left/right (for previous/next navigation). */
   direction?: "left" | "right";
   /** Optional icon (e.g. an <Icon />) rendered alongside the label. */
@@ -27,6 +29,12 @@ const VARIANTS: Record<ButtonVariant, string> = {
   primary:
     "text-white bg-[#2d7048] border-[#2d7048] shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] " +
     "hover:bg-[#28633f] hover:border-[#28633f] active:bg-[#254934]",
+  secondary:
+    "text-[#252626] bg-[#f2f2f2] border-[#f2f2f2] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] " +
+    "hover:bg-[#e3e6ea] hover:border-[#e3e6ea] active:bg-[#d6dade]",
+  danger:
+    "text-white bg-[#cc334c] border-[#cc334c] shadow-[0_2px_4px_0_rgba(204,51,76,0.16)] " +
+    "hover:bg-[#b32d43] hover:border-[#b32d43] active:bg-[#99263a]",
   link: "text-[#116fae] bg-transparent border-transparent shadow-none hover:underline",
 };
 
@@ -34,6 +42,8 @@ const VARIANTS: Record<ButtonVariant, string> = {
 const DIRECTION_COLORS: Record<ButtonVariant, { surface: string; border: string; text: string }> = {
   default: { surface: "#ffffff", border: "#8a8a8a", text: "#252626" },
   primary: { surface: "#2d7048", border: "#2d7048", text: "#ffffff" },
+  secondary: { surface: "#f2f2f2", border: "#f2f2f2", text: "#252626" },
+  danger: { surface: "#cc334c", border: "#cc334c", text: "#ffffff" },
   link: { surface: "transparent", border: "transparent", text: "#116fae" },
 };
 
@@ -45,16 +55,53 @@ const SIZES: Record<ButtonSize, string> = {
 const COMMON =
   "items-center justify-center gap-2 select-none whitespace-nowrap align-middle font-normal leading-tight cursor-pointer transition-colors";
 
+// Greyed-out look for the disabled state (omitted while loading, which keeps the
+// variant colours). Wins over hover since it's a later variant in the cascade.
+const DISABLED =
+  "disabled:cursor-not-allowed disabled:text-[#8a8a8a] disabled:bg-white disabled:border-[#c0c0c0] disabled:shadow-none";
+
+/** Inline spinner that inherits the button's text colour; self-animating, no CSS dep. */
+const ButtonSpinner = () => (
+  <svg
+    viewBox="0 0 16 16"
+    width="1em"
+    height="1em"
+    role="status"
+    aria-label="Loading"
+    className="shrink-0"
+  >
+    <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+    <path
+      d="M8 1.5a6.5 6.5 0 0 1 6.5 6.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    >
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        from="0 8 8"
+        to="360 8 8"
+        dur="0.7s"
+        repeatCount="indefinite"
+      />
+    </path>
+  </svg>
+);
+
 export const Button = ({
   variant = "default",
   size = "md",
   block = false,
+  loading = false,
   direction,
   icon,
   iconPosition = "start",
   children,
   className,
   type = "button",
+  disabled,
   style,
   ...props
 }: ButtonProps) => {
@@ -62,6 +109,17 @@ export const Button = ({
     // Lets a non-filled <Icon> inherit the button's text colour automatically.
     "--visma-icon-color": "currentColor",
   };
+
+  const isDisabled = disabled || loading;
+
+  const content = (
+    <>
+      {loading && <ButtonSpinner />}
+      {icon && iconPosition === "start" && !loading && icon}
+      {children}
+      {icon && iconPosition === "end" && icon}
+    </>
+  );
 
   let classes: string;
 
@@ -74,6 +132,7 @@ export const Button = ({
       "relative inline-flex min-w-[128px]",
       COMMON,
       SIZES[size],
+      loading ? "cursor-progress" : "",
       // extra padding on the pointed side so the label clears the notch
       direction === "left" ? "pl-7 pr-4" : "pl-4 pr-7",
       "vud-btn-direction",
@@ -94,8 +153,8 @@ export const Button = ({
     classes = [
       COMMON,
       "rounded-lg border",
-      // Disabled wins over the variant colours (and over hover, since it's a later variant).
-      "disabled:cursor-not-allowed disabled:text-[#8a8a8a] disabled:bg-white disabled:border-[#c0c0c0] disabled:shadow-none",
+      // Loading keeps the variant colour (just a wait cursor); disabled greys out.
+      loading ? "cursor-progress" : DISABLED,
       shape,
       SIZES[size],
       VARIANTS[variant],
@@ -109,12 +168,12 @@ export const Button = ({
     <button
       type={type}
       className={classes}
+      disabled={isDisabled}
+      aria-busy={loading || undefined}
       style={{ ...styleVars, ...(style as object) } as CSSProperties}
       {...props}
     >
-      {icon && iconPosition === "start" && icon}
-      {children}
-      {icon && iconPosition === "end" && icon}
+      {content}
     </button>
   );
 };

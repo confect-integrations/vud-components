@@ -26,17 +26,21 @@ export function Example() {
 That's all most apps need — alerts, buttons, forms, etc. ship their own inline
 SVG icons, so they render with no extra setup.
 
-> **Using Tailwind in your app?** `styles.css` contains precompiled Tailwind utilities.
-> Import it **before** your own Tailwind entry (e.g. `globals.css`) so your app's responsive
-> variants (`lg:`, `md:`, …) win the cascade over the library's base utilities.
+> **Scoped on purpose:** `styles.css` ships Tailwind *utilities* + the prefixed component CSS,
+> but **no preflight and no `@theme` tokens on `:root`** — so importing it never restyles your
+> app or overrides its fonts/colours, regardless of import order. Components assume a
+> Tailwind-style base (border-box, form font inheritance) — present in any Tailwind app; in a
+> non-Tailwind host add a minimal `*{ box-sizing: border-box }`. If you also use Tailwind and
+> class names overlap, import this before your own entry so your utilities win.
 
 ### The general-purpose `Icon` component
 
 `<Icon name="…" />` renders any icon from the VUD set, which lives in the
-`@vismaux/vud-icons` CSS (installed as a dependency). If you use `Icon`, add:
+`@vismaux/vud-icons` CSS (installed as a dependency). If you use `Icon`, import
+the icon stylesheet the package re-exports (so you don't reach into the dependency):
 
 ```tsx
-import "@vismaux/vud-icons/dist/css/vud-icons.min.css";
+import "@confect-development/vud-components/icons.css";
 ```
 
 ## What's included

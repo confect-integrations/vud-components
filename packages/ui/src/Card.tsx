@@ -95,3 +95,31 @@ export const Card = ({
     </Tag>
   );
 };
+
+const cn = (...parts: Array<string | false | undefined>) => parts.filter(Boolean).join(" ");
+
+/** Top row of a card: title/description on the left, an optional CardAction on the right. */
+export const CardHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("mb-2 flex items-start justify-between gap-4", className)} {...props} />
+);
+
+export const CardTitle = ({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) => (
+  <h3 className={cn("text-base font-bold text-[#252626]", className)} {...props} />
+);
+
+export const CardDescription = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
+  <p className={cn("text-sm text-[#6f7271]", className)} {...props} />
+);
+
+export const CardContent = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("text-base text-[#252626]", className)} {...props} />
+);
+
+export const CardFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("mt-4 flex items-center gap-2", className)} {...props} />
+);
+
+/** Right-aligned action area for use inside CardHeader (e.g. a menu button or link). */
+export const CardAction = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex shrink-0 items-center gap-2", className)} {...props} />
+);

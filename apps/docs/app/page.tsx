@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import {
-  Alert,
   Badge,
   Button,
   Icon,
@@ -36,6 +35,7 @@ import { DrawerExample } from "./components/DrawerExample";
 import { ModalExample } from "./components/ModalExample";
 import { OverlaysDemo } from "./components/OverlaysDemo";
 import { FormsDemo } from "./components/FormsDemo";
+import { AlertDemo } from "./components/AlertDemo";
 import { DocsNav } from "./components/DocsNav";
 
 type Section = {
@@ -64,14 +64,21 @@ const GROUPS: Group[] = [
         id: "button",
         title: "Button",
         blurb:
-          "Triggers actions and submits forms. Default, primary and link styles, plus an arrow-tab direction variant and optional icons.",
-        useCases: ["Form submit", "Toolbars", "Primary CTAs", "Wizard nav"],
+          "Triggers actions and submits forms. Default, primary, secondary, danger and link styles, plus a loading state, an arrow-tab direction variant and optional icons.",
+        useCases: ["Form submit", "Toolbars", "Primary CTAs", "Destructive actions"],
         demo: (
           <div className="flex flex-col gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <Button>Default</Button>
               <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="danger">Danger</Button>
               <Button variant="link">Link</Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button variant="primary" loading>
+                Saving
+              </Button>
               <Button variant="primary" disabled>
                 Disabled
               </Button>
@@ -143,16 +150,10 @@ const GROUPS: Group[] = [
       {
         id: "alert",
         title: "Alert",
-        blurb: "Inline contextual feedback that sits in the page flow.",
-        useCases: ["Form validation", "Status notices", "Inline banners"],
-        demo: (
-          <div className="flex flex-col gap-2">
-            <Alert message="This is the default alert message" />
-            <Alert message="This is the info alert message" type="info" />
-            <Alert message="This is the warning alert message" type="warning" />
-            <Alert message="This is the error alert message" type="error" />
-          </div>
-        ),
+        blurb:
+          "Inline contextual feedback with an optional heading, rich body, a dismiss button and an action slot.",
+        useCases: ["Form validation", "Status notices", "Dismissible banners"],
+        demo: <AlertDemo />,
       },
       {
         id: "pills",
@@ -623,7 +624,7 @@ export default function App() {
       Most components ship their own inline icons. The general-purpose{" "}
       <code className={code}>Icon</code> component additionally needs the VUD icon CSS:
     </p>
-    <CodeBlock>import &quot;@vismaux/vud-icons/dist/css/vud-icons.min.css&quot;;</CodeBlock>
+    <CodeBlock>import &quot;@confect-development/vud-components/icons.css&quot;;</CodeBlock>
   </section>
 );
 

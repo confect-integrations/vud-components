@@ -18,11 +18,13 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./icons.css": "./dist/icons.css"
   },
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.build.json && npm run build:css",
+    "build": "npm run clean && tsc -p tsconfig.build.json && npm run build:css && npm run build:icons",
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:icons": "cp ./src/icons.css ./dist/icons.css",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist",
     "storybook": "storybook dev -p 6006",

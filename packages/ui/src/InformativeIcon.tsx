@@ -1,6 +1,7 @@
 import type { SVGProps } from "react";
 
 export type InformativeIconName = "info" | "success" | "warning" | "error" | "help";
+export type InformativeIconSize = "sm" | "md" | "lg";
 
 // Self-contained VUD-style informative icons (coloured shape + white glyph),
 // so icon-bearing components don't depend on the external icon CSS.
@@ -12,22 +13,37 @@ const COLOR: Record<InformativeIconName, string> = {
   help: "#6f7271",
 };
 
+// Token sizes, consistent with the rest of the library (sm/md/lg). A raw number
+// is still accepted as an escape hatch.
+const SIZE_PX: Record<InformativeIconSize, number> = { sm: 16, md: 20, lg: 24 };
+
 export type InformativeIconProps = {
   name: InformativeIconName;
-  /** Pixel size (square). */
-  size?: number;
+  /** Box size: "sm" (16) | "md" (20) | "lg" (24), or a pixel number. */
+  size?: InformativeIconSize | number;
 } & Omit<SVGProps<SVGSVGElement>, "name">;
 
-export const InformativeIcon = ({ name, size = 16, className, ...props }: InformativeIconProps) => {
+export const InformativeIcon = ({
+  name,
+  size = "sm",
+  className,
+  "aria-hidden": ariaHidden,
+  ...props
+}: InformativeIconProps) => {
   const fill = COLOR[name];
+  const px = typeof size === "number" ? size : SIZE_PX[size];
+  // Decorative (aria-hidden) callers skip the implicit role/label.
+  const a11y = ariaHidden
+    ? { "aria-hidden": true as const }
+    : { role: "img", "aria-label": name };
+
   return (
     <svg
-      width={size}
-      height={size}
+      width={px}
+      height={px}
       viewBox="0 0 16 16"
       fill="none"
-      role="img"
-      aria-label={name}
+      {...a11y}
       className={["inline-block shrink-0 align-middle", className].filter(Boolean).join(" ")}
       {...props}
     >

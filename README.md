@@ -31,15 +31,18 @@ export default function App() {
 ```
 
 Most components ship their own inline icons. The general-purpose `Icon` component additionally
-needs the VUD icon CSS:
+needs the VUD icon CSS, exposed via the package (no need to reach into the dependency):
 
 ```ts
-import "@vismaux/vud-icons/dist/css/vud-icons.min.css";
+import "@confect-development/vud-components/icons.css";
 ```
 
-> **Using Tailwind in your app?** The package ships precompiled Tailwind utilities inside
-> `styles.css`. Import it **before** your own Tailwind entry (e.g. `globals.css`) so your app's
-> responsive variants (`lg:`, `md:`, …) win the cascade.
+> **Scoped on purpose:** `styles.css` ships Tailwind *utilities* + the prefixed component CSS —
+> but **no preflight and no `@theme` tokens on `:root`** — so importing it won't restyle your app
+> or override its fonts/colours, whatever the import order. Components assume a Tailwind-style base
+> (border-box, form font inheritance), which any Tailwind app already has; in a non-Tailwind host,
+> add a minimal `*{ box-sizing: border-box }`. If you also use Tailwind and class names overlap,
+> import this before your own entry so your utilities win the cascade.
 
 The components are server-friendly: per-file `"use client"` boundaries are preserved, so they
 work in Next.js App Router (Server Components) and any React 18/19 app.

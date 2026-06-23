@@ -1,0 +1,11 @@
+/* Optional icon stylesheet for the <Icon> component.
+
+   Import this from your app (e.g. once in your root layout) instead of reaching
+   into the @vismaux/vud-icons package directly:
+
+     import "@confect-development/vud-components/icons.css";
+
+   It re-exports the VUD icon CSS (font + SVG assets resolve from the
+   @vismaux/vud-icons dependency, which is installed alongside this package).
+   The inline-SVG components (Alert, Spinner, InformativeIcon) need nothing. */
+@import "@vismaux/vud-icons/dist/css/vud-icons.min.css";

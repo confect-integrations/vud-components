@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Card } from "./Card";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./Card";
+import { Button } from "./Button";
 
 const meta = {
   title: "Components/Card",
@@ -59,4 +68,33 @@ export const Row: Story = {
 
 export const AsButton: Story = {
   args: { as: "button", interactive: true, title: undefined, children: "I am a <button>" },
+};
+
+/** Composed from the CardHeader / CardTitle / CardContent / CardAction / CardFooter parts. */
+export const Composed: Story = {
+  args: { title: undefined, children: undefined },
+  render: () => (
+    <Card className="max-w-sm">
+      <CardHeader>
+        <div>
+          <CardTitle>Project settings</CardTitle>
+          <CardDescription>Manage who can access this project.</CardDescription>
+        </div>
+        <CardAction>
+          <Button size="md" variant="link">
+            Edit
+          </Button>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        Members inherit the workspace role unless overridden here. Changes apply immediately.
+      </CardContent>
+      <CardFooter>
+        <Button size="md" variant="primary">
+          Save
+        </Button>
+        <Button size="md">Cancel</Button>
+      </CardFooter>
+    </Card>
+  ),
 };

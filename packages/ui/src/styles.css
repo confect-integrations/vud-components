@@ -1,6 +1,33 @@
 /* Stylesheet entry for @confect-development/vud-components.
-   Tailwind scans the built JS for the utility classes the components use, then
-   appends the global component CSS. Icons are a separate import — see README. */
-@import "tailwindcss" source(none);
-@import "./vud-components.css";
+
+   Scoped on purpose: this ships Tailwind's utilities (scanned from the built JS)
+   + the prefixed component CSS, but deliberately omits Tailwind's preflight and
+   does NOT emit font-family or the colour palette onto :root. That way importing
+   this file never restyles the host or fights its theme tokens (e.g. --font-sans),
+   regardless of import order.
+
+   Components rely on a Tailwind-style base reset (border-box, form font inheritance)
+   — already present in any Tailwind app. In a non-Tailwind host, add a minimal
+   `*{ box-sizing: border-box }` reset. Icons are a separate import — see README. */
+/* Declare the canonical Tailwind layer order so utilities stay correctly ordered
+   when this merges with a host's own Tailwind layers (base/components stay empty here). */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
 @source "../dist/**/*.js";
+
+/* Keep theme tokens off the host's :root where they'd collide: drop the font
+   families and the full colour palette (components use VUD hex values directly),
+   keeping only white/black, which utilities like bg-white/text-white need. */
+@theme {
+  --font-sans: initial;
+  --font-serif: initial;
+  --font-mono: initial;
+  --color-*: initial;
+  --color-white: #fff;
+  --color-black: #000;
+}
+
+@import "./vud-components.css";
