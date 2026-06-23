@@ -56,6 +56,28 @@ const Brand = () => (
   </>
 );
 
+/** Confect wordmark + burst mark (white, for the dark navy header). Inlined so it
+    needs no external asset and scales crisply. */
+const ConfectLogo = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 320 132" fill="#fff" role="img" aria-label="Confect" className={className}>
+    <g>
+      <path d="M116.1,67.3c0-2.6.5-4.9,1.4-7s2.2-3.9,3.7-5.4c1.6-1.5,3.4-2.6,5.6-3.4,2.1-.8,4.4-1.2,6.9-1.2s4.9.4,7.1,1.2c2.2.8,4.1,1.9,5.6,3.3l-6.7,8c-.6-.8-1.4-1.4-2.3-1.8s-1.9-.6-3.1-.6c-.9,0-1.8.2-2.6.5s-1.5.8-2.1,1.4-1.1,1.3-1.4,2.2c-.3.9-.5,1.8-.5,2.9s.2,2,.5,2.8.8,1.6,1.4,2.2,1.3,1.1,2.1,1.4,1.6.5,2.5.5c1.2,0,2.3-.3,3.2-.8s1.6-1.1,2.1-1.8l6.7,8c-1.5,1.5-3.2,2.6-5.4,3.5-2.1.9-4.6,1.3-7.2,1.3-2.4,0-4.7-.4-6.9-1.2s-4-2-5.6-3.5-2.8-3.3-3.7-5.4c-.8-2.2-1.3-4.6-1.3-7.1h0Z" />
+      <path d="M172.4,71.3c0,2.1-.4,3.9-1.1,5.5-.8,1.6-1.8,3-3,4.1-1.2,1.1-2.7,1.9-4.4,2.5s-3.4.9-5.2.9-3.5-.3-5.2-.9-3.1-1.4-4.4-2.5-2.2-2.5-3-4.1-1.1-3.4-1.1-5.5.4-3.8,1.1-5.4c.7-1.6,1.7-2.9,3-4,1.2-1.1,2.7-1.9,4.4-2.5s3.4-.8,5.2-.8,3.6.3,5.2.8,3.1,1.4,4.4,2.5c1.3,1.1,2.3,2.4,3,4,.8,1.6,1.1,3.4,1.1,5.4ZM158.7,67.4c-1.2,0-2.1.4-2.8,1.2-.7.8-1.1,1.7-1.1,2.8s.4,2.1,1.1,2.9c.7.8,1.7,1.2,2.8,1.2s2.1-.4,2.8-1.2c.7-.8,1.1-1.8,1.1-2.9s-.4-2-1.1-2.8-1.6-1.2-2.8-1.2h0Z" />
+      <path d="M173.5,59.4h10.3v2.7h.1c.6-.9,1.5-1.7,2.7-2.3,1.2-.7,2.6-1,4.1-1,1.7,0,3.1.3,4.2.9s2,1.4,2.6,2.3c.6.9,1.1,2,1.4,3.2.3,1.2.4,2.4.4,3.6v14.6h-10.5v-12.7c0-1.2-.2-2.1-.6-2.6-.4-.5-.9-.7-1.7-.7-.7,0-1.3.3-1.7.8s-.7,1.4-.7,2.4v12.8h-10.5l-.1-24h0Z" />
+      <path d="M219.1,55.8c-.4-.1-.7-.1-1.1-.1-1,0-1.8.3-2.2,1s-.6,1.4-.6,2.4v.3h5.1v7.5h-5.1v16.5h-10.5v-16.4h-4.1v-7.5h4.1v-.5c0-1.5.2-2.9.5-4.3s.9-2.6,1.8-3.6c.9-1,2-1.9,3.5-2.5,1.4-.6,3.3-.9,5.5-.9.7,0,1.5,0,2.4.2.9.1,1.7.3,2.4.5l-.7,7.9c-.3-.3-.6-.4-1-.5h0Z" />
+      <path d="M246.6,71.6v1.2c0,.4,0,.8-.1,1h-16.1c0,.4.2.8.4,1.1.3.3.6.6,1,.9.4.2.8.4,1.3.6s.9.2,1.4.2c1,0,1.8-.2,2.4-.5.6-.3,1.1-.7,1.5-1.2l7.5,3.8c-1.1,1.7-2.6,3.1-4.6,4.1s-4.4,1.5-7.1,1.5c-1.7,0-3.4-.3-5.1-.8s-3.1-1.4-4.4-2.4c-1.3-1.1-2.3-2.4-3-4-.8-1.6-1.1-3.5-1.1-5.6s.4-3.8,1.1-5.4,1.6-3,2.9-4.1c1.2-1.1,2.6-2,4.2-2.6,1.6-.6,3.4-.9,5.2-.9s3.6.3,5.1,1c1.6.7,2.9,1.6,4,2.7,1.1,1.2,2,2.6,2.6,4.2.6,1.6.8,3.4.9,5.2h0ZM237.5,68.2c0-.8-.3-1.6-.9-2.1-.6-.6-1.5-.8-2.5-.8-1.2,0-2.1.3-2.7,1s-1,1.3-1.1,2l7.2-.1h0Z" />
+      <path d="M262.4,84.3c-2,0-3.9-.3-5.6-.9-1.7-.6-3.2-1.5-4.4-2.6s-2.2-2.5-2.9-4.1c-.7-1.6-1.1-3.4-1.1-5.3s.4-3.7,1.1-5.3c.7-1.6,1.7-3,3-4.1,1.3-1.1,2.8-2,4.5-2.6,1.7-.6,3.6-.9,5.6-.9.8,0,1.6.1,2.5.2s1.6.3,2.4.6,1.5.5,2.1.8,1.2.6,1.7,1l-5.2,7.6c-.4-.4-.8-.7-1.4-.9s-1.2-.3-1.7-.3-1,.1-1.5.2c-.5.2-.9.4-1.3.8-.4.3-.7.8-.9,1.3s-.4,1.1-.4,1.8.1,1.2.4,1.8c.2.5.5.9.9,1.2s.8.6,1.3.7c.5.2,1,.2,1.5.2.6,0,1.2-.1,1.8-.3.6-.2,1-.5,1.4-.9l5.3,7.4c-1,.8-2.3,1.4-3.9,2-1.7.4-3.4.6-5.2.6h0Z" />
+      <path d="M282.9,84.1c-3.2,0-5.6-.7-7.2-2.1-1.5-1.4-2.3-3.5-2.3-6.4v-8.6h-3.4v-7.5h3.3v-5.4h10.2v5.4h5.2v7.5h-5.2v6.4c0,1.2.2,1.9.8,2.3.5.4,1.2.6,2.1.6.3,0,.7,0,1-.1.4-.1.6-.1.9-.2v7.2c-.5.2-1.3.4-2.3.6-.9.2-2,.3-3.1.3h0Z" />
+    </g>
+    <g opacity="0.75">
+      <rect x="48.83" y="23.5" width="22.03" height="83.03" rx="2.16" ry="2.16" />
+      <rect x="48.83" y="23.5" width="22.03" height="83.03" rx="2.16" ry="2.16" transform="translate(124.86 5.17) rotate(90)" />
+      <rect x="48.83" y="23.5" width="22.03" height="83.03" rx="2.16" ry="2.16" transform="translate(63.5 -23.28) rotate(45)" />
+      <rect x="48.83" y="23.5" width="22.03" height="83.03" rx="2.16" ry="2.16" transform="translate(148.14 68.67) rotate(135)" />
+    </g>
+  </svg>
+);
+
 const GROUPS: Group[] = [
   {
     title: "Foundations",
@@ -563,10 +585,10 @@ const NAV = [
   })),
 ];
 
-const code = "rounded bg-[#f0f1f3] px-1.5 py-0.5 text-[13px] text-[#252626]";
+const code = "rounded bg-[#eef2f5] px-1.5 py-0.5 text-[13px] text-[#003253]";
 
 const CodeBlock = ({ children }: { children: ReactNode }) => (
-  <pre className="mt-3 overflow-x-auto rounded-lg bg-[#252626] p-4 text-[13px] leading-relaxed text-[#e6e6e6]">
+  <pre className="mt-3 overflow-x-auto rounded-lg bg-[#002b46] p-4 text-[13px] leading-relaxed text-[#e6edf2]">
     <code>{children}</code>
   </pre>
 );
@@ -578,7 +600,7 @@ const DocLink = ({ href, children }: { href: string; children: ReactNode }) => {
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="inline-flex items-center gap-1.5 rounded-md border border-[#e3e6ea] bg-white px-3 py-1.5 text-sm font-medium text-[#252626] transition-colors hover:border-[#1482cc] hover:text-[#1482cc]"
+      className="inline-flex items-center gap-1.5 rounded-md border border-[#e3e6ea] bg-white px-3 py-1.5 text-sm font-medium text-[#003253] transition-colors hover:border-[#ff8e07] hover:text-[#cc7100]"
     >
       {children}
     </a>
@@ -587,7 +609,7 @@ const DocLink = ({ href, children }: { href: string; children: ReactNode }) => {
 
 const GetStarted = () => (
   <section id="get-started" className="scroll-mt-24 border-b border-[#e3e6ea] py-12">
-    <h2 className="text-2xl font-bold tracking-tight text-[#252626]">Get started</h2>
+    <h2 className="font-heading text-2xl font-bold tracking-tight text-[#003253]">Get started</h2>
     <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#6f7271]">
       Install the package and import the stylesheet once. Components work in any React 18 or
       19 app, with server/client boundaries preserved for Next.js (App Router).
@@ -599,7 +621,7 @@ const GetStarted = () => (
       <DocLink href={STORYBOOK_URL}>Storybook ↗</DocLink>
     </div>
 
-    <h3 id="installation" className="mt-8 scroll-mt-24 text-lg font-bold text-[#252626]">
+    <h3 id="installation" className="mt-8 scroll-mt-24 font-heading text-lg font-bold text-[#003253]">
       Installation
     </h3>
     <CodeBlock>npm install {PKG}</CodeBlock>
@@ -608,7 +630,7 @@ const GetStarted = () => (
       <code className={code}>react-dom</code> (v18 or v19).
     </p>
 
-    <h3 id="usage" className="mt-8 scroll-mt-24 text-lg font-bold text-[#252626]">
+    <h3 id="usage" className="mt-8 scroll-mt-24 font-heading text-lg font-bold text-[#003253]">
       Usage
     </h3>
     <p className="mt-1.5 text-sm text-[#6f7271]">
@@ -630,7 +652,7 @@ export default function App() {
 
 const SectionView = ({ id, title, blurb, useCases, demo }: Section) => (
   <section id={id} className="scroll-mt-24 py-8">
-    <h3 className="text-xl font-bold text-[#252626]">{title}</h3>
+    <h3 className="font-heading text-xl font-bold text-[#003253]">{title}</h3>
     <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-[#6f7271]">{blurb}</p>
     {useCases.length > 0 && (
       <div className="mt-3 flex flex-wrap gap-2">
@@ -652,25 +674,34 @@ const SectionView = ({ id, title, blurb, useCases, demo }: Section) => (
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#f7f8fa] text-[#252626]">
-      <div className="sticky top-0 z-40">
-        <TopNavigation
-          brand={<Brand />}
-          actions={
+    <div className="min-h-screen bg-[#f7f8fa] text-[#333333]">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#003253]">
+        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-6 px-6">
+          <a href="#get-started" className="flex items-center gap-3">
+            <ConfectLogo className="h-7 w-auto" />
+            <span className="hidden text-sm font-medium text-white/40 sm:inline">
+              VUD Components
+            </span>
+          </a>
+          <nav className="flex items-center gap-5 text-sm">
+            <a href="#button" className="text-white/80 transition-colors hover:text-[#ff8e07]">
+              Components
+            </a>
             <a
-              href={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/storybook/`}
-              className="text-sm text-white/80 hover:text-white"
+              href="#form-controls"
+              className="text-white/80 transition-colors hover:text-[#ff8e07]"
+            >
+              Forms
+            </a>
+            <a
+              href={STORYBOOK_URL}
+              className="text-white/80 transition-colors hover:text-[#ff8e07]"
             >
               Storybook ↗
             </a>
-          }
-        >
-          <TopNavigationItem href="#button" active>
-            Components
-          </TopNavigationItem>
-          <TopNavigationItem href="#form-controls">Forms</TopNavigationItem>
-        </TopNavigation>
-      </div>
+          </nav>
+        </div>
+      </header>
 
       <div className="mx-auto flex w-full max-w-[1400px] gap-10 px-6">
         <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-56 shrink-0 overflow-y-auto py-8 lg:block">
@@ -679,11 +710,13 @@ export default function Home() {
 
         <main className="min-w-0 flex-1 pb-24">
           <header className="border-b border-[#e3e6ea] py-12">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#cfe6f7] bg-[#e7f2f9] px-3 py-1 text-xs font-semibold text-[#116fae]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ffd9a8] bg-[#fff4e6] px-3 py-1 text-xs font-semibold text-[#b35f00]">
               Visma Unified Design · React
             </span>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight">Component Library</h1>
-            <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#6f7271]">
+            <h1 className="mt-4 font-heading text-[40px] font-bold leading-tight tracking-tight text-[#003253]">
+              Component Library
+            </h1>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#4a4a4a]">
               A faithful React + Tailwind recreation of Visma&apos;s design system —
               accessible, typed and ready to drop into a Next.js app. Browse the components
               below; each shows its common use cases and a live example.
@@ -692,7 +725,7 @@ export default function Home() {
               {["Next.js 16", "React 19", "Tailwind v4", "TypeScript", "Storybook"].map((t) => (
                 <span
                   key={t}
-                  className="rounded-md border border-[#e3e6ea] bg-white px-2.5 py-1 text-xs font-medium text-[#494a4a]"
+                  className="rounded-md border border-[#e3e6ea] bg-white px-2.5 py-1 text-xs font-medium text-[#4a4a4a]"
                 >
                   {t}
                 </span>
@@ -704,7 +737,7 @@ export default function Home() {
 
           {GROUPS.map((g) => (
             <div key={g.title}>
-              <h2 className="scroll-mt-24 pt-12 text-2xl font-bold tracking-tight text-[#252626]">
+              <h2 className="scroll-mt-24 pt-12 font-heading text-2xl font-bold tracking-tight text-[#003253]">
                 {g.title}
               </h2>
               <div className="divide-y divide-[#eceef1]">

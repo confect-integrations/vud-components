@@ -44,8 +44,8 @@ export const DocsNav = ({ groups }: { groups: DocsNavGroup[] }) => {
                   href={`#${i.id}`}
                   className={`block rounded-md px-3 py-1.5 transition-colors ${
                     active === i.id
-                      ? "bg-[#e7f2f9] font-semibold text-[#116fae]"
-                      : "text-[#494a4a] hover:bg-[#f0f1f3] hover:text-[#252626]"
+                      ? "bg-[#e6eef3] font-semibold text-[#003253]"
+                      : "text-[#4a4a4a] hover:bg-[#f0f1f3] hover:text-[#003253]"
                   }`}
                 >
                   {i.title}
