@@ -61,11 +61,11 @@ export const TopNavigation = ({
     aria-label="Main"
     style={VARIANT_VARS[variant]}
     className={[
-      "flex h-16 w-full items-stretch bg-[var(--tn-bg)] text-[var(--tn-fg)]",
-      // Toned-down bar reads as a sub menu: a hairline border rather than a shadow.
+      "flex w-full items-stretch bg-[var(--tn-bg)] text-[var(--tn-fg)]",
+      // Toned-down bar reads as a sub menu: shorter, a hairline border (no shadow).
       variant === "subtle"
-        ? "border-b border-[var(--tn-border)]"
-        : "shadow-[0_2px_4px_0_rgba(37,38,38,0.16)]",
+        ? "h-12 border-b border-[var(--tn-border)]"
+        : "h-16 shadow-[0_2px_4px_0_rgba(37,38,38,0.16)]",
       className,
     ]
       .filter(Boolean)
