@@ -543,10 +543,89 @@ const GROUPS: Group[] = [
   },
 ];
 
-const NAV = GROUPS.map((g) => ({
-  title: g.title,
-  items: g.sections.map((s) => ({ id: s.id, title: s.title })),
-}));
+const PKG = "@confect-development/vud-components";
+const NPM_URL = "https://www.npmjs.com/package/@confect-development/vud-components";
+const GITHUB_URL = "https://github.com/confect-integrations/vud-components";
+const STORYBOOK_URL = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/storybook/`;
+
+const NAV = [
+  {
+    title: "Get started",
+    items: [
+      { id: "installation", title: "Installation" },
+      { id: "usage", title: "Usage" },
+    ],
+  },
+  ...GROUPS.map((g) => ({
+    title: g.title,
+    items: g.sections.map((s) => ({ id: s.id, title: s.title })),
+  })),
+];
+
+const code = "rounded bg-[#f0f1f3] px-1.5 py-0.5 text-[13px] text-[#252626]";
+
+const CodeBlock = ({ children }: { children: ReactNode }) => (
+  <pre className="mt-3 overflow-x-auto rounded-lg bg-[#252626] p-4 text-[13px] leading-relaxed text-[#e6e6e6]">
+    <code>{children}</code>
+  </pre>
+);
+
+const DocLink = ({ href, children }: { href: string; children: ReactNode }) => {
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className="inline-flex items-center gap-1.5 rounded-md border border-[#e3e6ea] bg-white px-3 py-1.5 text-sm font-medium text-[#252626] transition-colors hover:border-[#1482cc] hover:text-[#1482cc]"
+    >
+      {children}
+    </a>
+  );
+};
+
+const GetStarted = () => (
+  <section id="get-started" className="scroll-mt-24 border-b border-[#e3e6ea] py-12">
+    <h2 className="text-2xl font-bold tracking-tight text-[#252626]">Get started</h2>
+    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#6f7271]">
+      Install the package and import the stylesheet once. Components work in any React 18 or
+      19 app, with server/client boundaries preserved for Next.js (App Router).
+    </p>
+
+    <div className="mt-5 flex flex-wrap gap-2">
+      <DocLink href={NPM_URL}>npm ↗</DocLink>
+      <DocLink href={GITHUB_URL}>GitHub ↗</DocLink>
+      <DocLink href={STORYBOOK_URL}>Storybook ↗</DocLink>
+    </div>
+
+    <h3 id="installation" className="mt-8 scroll-mt-24 text-lg font-bold text-[#252626]">
+      Installation
+    </h3>
+    <CodeBlock>npm install {PKG}</CodeBlock>
+    <p className="mt-2 text-sm text-[#6f7271]">
+      Peer dependencies: <code className={code}>react</code> and{" "}
+      <code className={code}>react-dom</code> (v18 or v19).
+    </p>
+
+    <h3 id="usage" className="mt-8 scroll-mt-24 text-lg font-bold text-[#252626]">
+      Usage
+    </h3>
+    <p className="mt-1.5 text-sm text-[#6f7271]">
+      Import components by name and the stylesheet once (e.g. in your root layout):
+    </p>
+    <CodeBlock>{`import { Button, Modal } from "${PKG}";
+import "${PKG}/styles.css";
+
+export default function App() {
+  return <Button variant="primary">Save</Button>;
+}`}</CodeBlock>
+    <p className="mt-3 text-sm text-[#6f7271]">
+      Most components ship their own inline icons. The general-purpose{" "}
+      <code className={code}>Icon</code> component additionally needs the VUD icon CSS:
+    </p>
+    <CodeBlock>import &quot;@vismaux/vud-icons/dist/css/vud-icons.min.css&quot;;</CodeBlock>
+  </section>
+);
 
 const SectionView = ({ id, title, blurb, useCases, demo }: Section) => (
   <section id={id} className="scroll-mt-24 py-8">
@@ -619,6 +698,8 @@ export default function Home() {
               ))}
             </div>
           </header>
+
+          <GetStarted />
 
           {GROUPS.map((g) => (
             <div key={g.title}>

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+// Import the library's precompiled CSS first, then the docs' own Tailwind last.
+// Both ship Tailwind utilities; keeping globals.css last lets the docs page's
+// responsive variants (lg:*, md:*) win over the library's base utilities.
 import "@confect-development/vud-components/styles.css";
 import "@vismaux/vud-icons/dist/css/vud-icons.min.css";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
