@@ -1,15 +1,44 @@
-import type { MouseEventHandler, ReactNode } from "react";
+import type { CSSProperties, MouseEventHandler, ReactNode } from "react";
 
-export type TopNavVariant = "primary" | "default";
+export type TopNavVariant = "primary" | "default" | "subtle";
 
-// primary/inverted = dark; default = Visma blue.
-const BAR_BG: Record<TopNavVariant, string> = {
-  primary: "bg-[#252626]",
-  default: "bg-[#0d5788]",
+// Theme tokens consumed by the bar AND its items, set as CSS variables on the
+// nav so items adapt to the variant without a React context (keeps the whole
+// component server-renderable). `subtle` is a toned-down, light "sub menu" bar
+// for when the nav sits under a host application's own (dark) top bar.
+const VARIANT_VARS: Record<TopNavVariant, CSSProperties> = {
+  primary: {
+    "--tn-bg": "#252626",
+    "--tn-fg": "#ffffff",
+    "--tn-active-fg": "#ffffff",
+    "--tn-border": "rgba(255,255,255,0.10)",
+    "--tn-hover": "rgba(255,255,255,0.08)",
+    "--tn-active": "rgba(255,255,255,0.08)",
+    "--tn-indicator": "#ffffff",
+  } as CSSProperties,
+  default: {
+    "--tn-bg": "#0d5788",
+    "--tn-fg": "#ffffff",
+    "--tn-active-fg": "#ffffff",
+    "--tn-border": "rgba(255,255,255,0.10)",
+    "--tn-hover": "rgba(255,255,255,0.08)",
+    "--tn-active": "rgba(255,255,255,0.08)",
+    "--tn-indicator": "#ffffff",
+  } as CSSProperties,
+  subtle: {
+    "--tn-bg": "#ffffff",
+    "--tn-fg": "#494a4a",
+    "--tn-active-fg": "#1482cc",
+    "--tn-border": "#e3e6ea",
+    "--tn-hover": "#f2f2f2",
+    "--tn-active": "transparent",
+    "--tn-indicator": "#1482cc",
+  } as CSSProperties,
 };
 
 export type TopNavigationProps = {
-  /** Bar colour: `primary` (dark) or `default` (Visma blue). */
+  /** Bar style: `primary` (dark), `default` (Visma blue), or `subtle` (light
+   *  sub-menu bar for use under a host app's own top bar). */
   variant?: TopNavVariant;
   /** Brand / logo area shown on the left. */
   brand?: ReactNode;
@@ -30,16 +59,20 @@ export const TopNavigation = ({
 }: TopNavigationProps) => (
   <nav
     aria-label="Main"
+    style={VARIANT_VARS[variant]}
     className={[
-      "flex h-16 w-full items-stretch text-white shadow-[0_2px_4px_0_rgba(37,38,38,0.16)]",
-      BAR_BG[variant],
+      "flex h-16 w-full items-stretch bg-[var(--tn-bg)] text-[var(--tn-fg)]",
+      // Toned-down bar reads as a sub menu: a hairline border rather than a shadow.
+      variant === "subtle"
+        ? "border-b border-[var(--tn-border)]"
+        : "shadow-[0_2px_4px_0_rgba(37,38,38,0.16)]",
       className,
     ]
       .filter(Boolean)
       .join(" ")}
   >
     {brand && (
-      <div className="flex h-full min-w-[200px] items-center gap-3 border-r border-white/10 px-4 text-base font-medium">
+      <div className="flex h-full min-w-[200px] items-center gap-3 border-r border-[var(--tn-border)] px-4 text-base font-medium">
         {brand}
       </div>
     )}
@@ -72,11 +105,13 @@ export const TopNavigationItem = ({
   className,
 }: TopNavigationItemProps) => {
   const classes = [
-    "relative flex h-full items-center px-4 text-sm font-normal text-white outline-none transition-colors",
+    "relative flex h-full items-center px-4 text-sm outline-none transition-colors",
     disabled
-      ? "pointer-events-none text-white/40"
-      : "hover:bg-white/[0.08] focus-visible:bg-white/[0.08]",
-    active && "bg-white/[0.08]",
+      ? "pointer-events-none opacity-40"
+      : "hover:bg-[var(--tn-hover)] focus-visible:bg-[var(--tn-hover)]",
+    active
+      ? "bg-[var(--tn-active)] font-medium text-[var(--tn-active-fg)]"
+      : "font-normal text-[var(--tn-fg)]",
     className,
   ]
     .filter(Boolean)
@@ -86,7 +121,10 @@ export const TopNavigationItem = ({
     <>
       {children}
       {active && (
-        <span className="absolute inset-x-0 bottom-0 h-[3px] bg-white" aria-hidden="true" />
+        <span
+          className="absolute inset-x-0 bottom-0 h-[3px] bg-[var(--tn-indicator)]"
+          aria-hidden="true"
+        />
       )}
     </>
   );

@@ -331,8 +331,8 @@ const GROUPS: Group[] = [
         id: "top-navigation",
         title: "Top navigation",
         blurb:
-          "App-level header bar in a dark or Visma-blue theme, with a brand area, items and right-side actions.",
-        useCases: ["Product header", "Primary navigation"],
+          "App-level header bar with a brand area, items and right-side actions. Dark and Visma-blue themes, plus a toned-down `subtle` variant that reads as a sub menu when it sits under a host app's own top bar.",
+        useCases: ["Product header", "Primary navigation", "Embedded sub menu"],
         demo: (
           <div className="flex flex-col gap-4">
             <div className="overflow-hidden rounded-lg border border-[#dadada]">
@@ -374,6 +374,35 @@ const GROUPS: Group[] = [
                 </TopNavigationItem>
                 <TopNavigationItem href="#top-navigation">Invoices</TopNavigationItem>
                 <TopNavigationItem href="#top-navigation">Customers</TopNavigationItem>
+              </TopNavigation>
+            </div>
+            <div className="overflow-hidden rounded-lg border border-[#dadada]">
+              {/* The subtle variant under a simulated host (e.g. Visma Net) top bar. */}
+              <div className="flex h-12 items-center bg-[#0b3a52] px-4 text-sm font-medium text-white">
+                Host application
+              </div>
+              <TopNavigation
+                variant="subtle"
+                brand={
+                  <>
+                    <span className="flex h-7 w-7 items-center justify-center rounded bg-[#252626] text-sm font-bold text-white">
+                      V
+                    </span>
+                    <span className="text-[#252626]">VUD Components</span>
+                  </>
+                }
+                actions={
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e3e6ea] text-sm font-bold text-[#252626]">
+                    JM
+                  </span>
+                }
+              >
+                <TopNavigationItem href="#top-navigation" active>
+                  Dashboard
+                </TopNavigationItem>
+                <TopNavigationItem href="#top-navigation">Invoices</TopNavigationItem>
+                <TopNavigationItem href="#top-navigation">Customers</TopNavigationItem>
+                <TopNavigationItem disabled>Reports</TopNavigationItem>
               </TopNavigation>
             </div>
           </div>
