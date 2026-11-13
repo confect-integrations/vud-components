@@ -109,15 +109,15 @@ const ProductCard = ({ p }: { p: Product }) => (
   <Card row className="!items-stretch gap-6">
     <div className="flex flex-1 items-start gap-6">
       {/* thumbnail */}
-      <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden border border-[#8a8a8a] bg-[#f2f2f2] px-2 text-center text-xs text-[#6f7271]">
+      <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden border border-[var(--vud-rule-strong)] bg-[var(--vud-surface-sunk)] px-2 text-center text-xs text-[var(--vud-ink-subtle)]">
         {p.name}
       </div>
       <div className="min-w-[9rem]">
-        <a href="#" className="font-bold text-[#116fae] hover:underline">
+        <a href="#" className="font-bold text-[var(--vud-link)] hover:underline">
           Item x - 12 Pieces
         </a>
         <p className="text-sm">Article number {p.article}</p>
-        <span className="mt-1 flex gap-1 text-[#6f7271]">
+        <span className="mt-1 flex gap-1 text-[var(--vud-ink-subtle)]">
           <Icon name="info" size="sm" filled label="info" />
           <Icon name="settings" size="sm" />
         </span>
@@ -135,7 +135,7 @@ const ProductCard = ({ p }: { p: Product }) => (
         <input
           type="number"
           defaultValue={0}
-          className="h-8 w-20 rounded-lg border border-[#8a8a8a] px-2"
+          className="h-8 w-20 rounded-lg border border-[var(--vud-rule-strong)] px-2"
         />
       </div>
     </div>
@@ -144,7 +144,7 @@ const ProductCard = ({ p }: { p: Product }) => (
         <p className="text-lg font-bold">
           {p.price} <span className="text-sm font-normal">SEK</span>
         </p>
-        <p className="text-sm text-[#6f7271]">{p.original} SEK</p>
+        <p className="text-sm text-[var(--vud-ink-subtle)]">{p.original} SEK</p>
       </div>
       <Button variant="primary">Confirm</Button>
       <input type="checkbox" className="size-4" aria-label={`Select ${p.name}`} />

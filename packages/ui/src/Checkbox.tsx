@@ -17,13 +17,13 @@ export type CheckboxProps = {
 
 const CheckIcon = ({ color }: { color: string }) => (
   <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-    <path d="M2 6.2 4.7 9 10 3.2" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M2 6.2 4.7 9 10 3.2" style={{ stroke: color }} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const DashIcon = ({ color }: { color: string }) => (
   <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-    <path d="M2.5 6h7" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+    <path d="M2.5 6h7" style={{ stroke: color }} strokeWidth="1.8" strokeLinecap="round" />
   </svg>
 );
 
@@ -49,18 +49,18 @@ export const Checkbox = ({
 
   const filled = (checked || isMixed) && !disabled;
   const boxColor = disabled
-    ? "border-[#8a8a8a] bg-[#f2f2f2]"
+    ? "border-[var(--vud-rule-strong)] bg-[var(--vud-surface-sunk)]"
     : filled
-      ? "border-[#1482cc] bg-[#1482cc]"
-      : "border-[#8a8a8a] bg-white";
-  const markColor = disabled ? "#8a8a8a" : "#ffffff";
+      ? "border-[var(--vud-accent)] bg-[var(--vud-accent)]"
+      : "border-[var(--vud-rule-strong)] bg-[var(--vud-surface)]";
+  const markColor = disabled ? "var(--vud-ink-faint)" : "var(--vud-accent-contrast)";
 
   return (
     <label
       htmlFor={inputId}
       className={[
-        "inline-flex select-none items-start gap-2 text-sm",
-        disabled ? "cursor-not-allowed text-[#8a8a8a]" : "cursor-pointer text-[#252626]",
+        "vud-font inline-flex select-none items-start gap-2 text-sm",
+        disabled ? "cursor-not-allowed text-[var(--vud-ink-faint)]" : "cursor-pointer text-[var(--vud-ink)]",
         className,
       ]
         .filter(Boolean)
@@ -79,8 +79,8 @@ export const Checkbox = ({
       />
       <span
         className={[
-          "relative mt-px flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border transition-colors",
-          "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#1482cc]",
+          "relative mt-px flex h-4 w-4 shrink-0 items-center justify-center rounded-[var(--vud-radius-sm)] border transition-colors",
+          "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--vud-focus)]",
           boxColor,
         ].join(" ")}
       >

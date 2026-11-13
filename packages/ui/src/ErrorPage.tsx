@@ -58,21 +58,21 @@ export const ErrorPage = ({
   return (
     <div
       className={[
-        "rounded-[15px] bg-white p-12 shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] sm:p-16",
+        "vud-font rounded-[15px] bg-[var(--vud-surface)] p-12 shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] sm:p-16",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
     >
       <div className="mx-auto max-w-lg text-center">
-        <h1 className="mb-8 text-[32px] font-normal leading-none text-[#252626]">
+        <h1 className="mb-8 text-[32px] font-normal leading-none text-[var(--vud-ink)]">
           {title ?? cfg.title}
         </h1>
-        <div className="mb-8 leading-[1.8] text-[#252626]">{children ?? cfg.text}</div>
+        <div className="mb-8 leading-[1.8] text-[var(--vud-ink)]">{children ?? cfg.text}</div>
         {buttonCaption && (
           <a
             href={redirectUrl}
-            className="inline-flex h-9 items-center justify-center rounded-lg border border-[#2d7048] bg-[#2d7048] px-4 text-sm text-white shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] transition-colors hover:border-[#28633f] hover:bg-[#28633f]"
+            className="inline-flex h-9 items-center justify-center rounded-[var(--vud-radius-lg)] border border-[var(--vud-primary)] bg-[var(--vud-primary)] px-4 text-sm text-[var(--vud-primary-contrast)] shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] transition-colors hover:border-[var(--vud-primary-hover)] hover:bg-[var(--vud-primary-hover)]"
           >
             {buttonCaption}
           </a>

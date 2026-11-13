@@ -41,20 +41,20 @@ export const ProgressBar = ({
   const overLimit = value > safeMax;
   const fillWidth = Math.max(0, Math.min(pct, 100));
 
-  const fillColor = overLimit ? "bg-[#cc334c]" : "bg-[#1482cc]";
-  const textColor = overLimit ? "text-[#a12036]" : "text-[#494a4a]";
+  const fillColor = overLimit ? "bg-[var(--vud-danger)]" : "bg-[var(--vud-accent)]";
+  const textColor = overLimit ? "text-[var(--vud-danger-ink)]" : "text-[var(--vud-ink-muted)]";
   const hasLabel = label != null && label !== "";
   const hasFooter = hasLabel || showPercentage;
 
   return (
-    <div className={["w-full", className].filter(Boolean).join(" ")} {...props}>
+    <div className={["vud-font w-full", className].filter(Boolean).join(" ")} {...props}>
       <div
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={safeMax}
         aria-label={typeof label === "string" && label ? label : "Progress"}
-        className={`relative w-full overflow-hidden bg-[#bcbcbc] ${TRACK_SIZE[size]}`}
+        className={`relative w-full overflow-hidden bg-[var(--vud-track)] ${TRACK_SIZE[size]}`}
       >
         <div
           className={`h-full rounded-full transition-[width] duration-500 ease-out ${fillColor}`}

@@ -5,9 +5,9 @@ export type SpinnerColor = "blue" | "green" | "grey";
 export type SpinnerSize = "xs" | "sm" | "md";
 
 const COLORS: Record<SpinnerColor, { arc: string; track: string; snake: string }> = {
-  blue: { arc: "#116FAE", track: "#99CBEC", snake: "#116FAE" },
-  green: { arc: "#2D7048", track: "#AFD4AF", snake: "#2D7048" },
-  grey: { arc: "#494A4A", track: "#C0C0C0", snake: "#959799" },
+  blue: { arc: "var(--vud-accent-strong)", track: "var(--vud-spinner-blue-track)", snake: "var(--vud-accent-strong)" },
+  green: { arc: "var(--vud-success)", track: "var(--vud-spinner-green-track)", snake: "var(--vud-success)" },
+  grey: { arc: "var(--vud-ink-muted)", track: "var(--vud-rule-disabled)", snake: "var(--vud-spinner-grey-snake)" },
 };
 
 // VUD spinner box sizes (rendered from the 48-unit source art).
@@ -79,7 +79,7 @@ export const Spinner = ({
     return (
       <svg {...common} {...rest}>
         {DOTS.map((dot) => (
-          <path key={dot.begin} d={dot.d} fill={c.arc} opacity={0}>
+          <path key={dot.begin} d={dot.d} style={{ fill: c.arc }} opacity={0}>
             <animate
               attributeName="opacity"
               from="1"
@@ -106,8 +106,8 @@ export const Spinner = ({
           x2="48"
           y2="16.97"
         >
-          <stop offset="0" stopColor={c.snake} stopOpacity={0} />
-          <stop offset="1" stopColor={c.snake} stopOpacity={1} />
+          <stop offset="0" style={{ stopColor: c.snake }} stopOpacity={0} />
+          <stop offset="1" style={{ stopColor: c.snake }} stopOpacity={1} />
         </linearGradient>
         <path d={ARC_PATH} fill={`url(#${gradId})`}>
           <Rotate />
@@ -119,8 +119,8 @@ export const Spinner = ({
   // default — doughnut: static track ring + rotating solid arc.
   return (
     <svg {...common} {...rest}>
-      <path d={RING_PATH} fill={c.track} opacity={0.75} />
-      <path d={ARC_PATH} fill={c.arc}>
+      <path d={RING_PATH} style={{ fill: c.track }} opacity={0.75} />
+      <path d={ARC_PATH} style={{ fill: c.arc }}>
         <Rotate />
       </path>
     </svg>

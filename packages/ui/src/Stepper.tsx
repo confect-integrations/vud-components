@@ -25,7 +25,7 @@ const SZ = {
     center: "h-3 w-3",
     rowH: "h-12",
     text: "text-base",
-    halo: "shadow-[0_0_0_5px_#d2eafa]",
+    halo: "shadow-[0_0_0_5px_var(--vud-surface-hover)]",
   },
   small: {
     dot: "h-5 w-5",
@@ -33,7 +33,7 @@ const SZ = {
     center: "h-2 w-2",
     rowH: "h-8",
     text: "text-sm",
-    halo: "shadow-[0_0_0_3px_#d2eafa]",
+    halo: "shadow-[0_0_0_3px_var(--vud-surface-hover)]",
   },
 };
 
@@ -52,24 +52,24 @@ export const StepperStep = ({
   const isActive = stepType === "active";
 
   const titleCls = isActive
-    ? "font-bold text-[#252626]"
+    ? "font-bold text-[var(--vud-ink)]"
     : isPassed
-      ? "font-semibold text-[#2d7048]"
-      : "text-[#8a8a8a]";
+      ? "font-semibold text-[var(--vud-success)]"
+      : "text-[var(--vud-ink-faint)]";
 
   // Connector segment that leaves this step is green once the step is passed.
-  const lineCls = isPassed ? "bg-[#4e9c54]" : "bg-[#c0c0c0]";
+  const lineCls = isPassed ? "bg-[var(--vud-indicator)]" : "bg-[var(--vud-rule-disabled)]";
 
   const marker = isActive ? (
     <span
-      className={`relative z-10 flex shrink-0 items-center justify-center rounded-full bg-[#116fae] ${sz.active} ${sz.halo} ${trans}`}
+      className={`relative z-10 flex shrink-0 items-center justify-center rounded-full bg-[var(--vud-accent-strong)] ${sz.active} ${sz.halo} ${trans}`}
     >
       <span className={`rounded-full bg-white ${sz.center}`} />
     </span>
   ) : (
     <span
       className={`relative z-10 shrink-0 rounded-full ${sz.dot} ${
-        isPassed ? "bg-[#4e9c54]" : "bg-[#c0c0c0]"
+        isPassed ? "bg-[var(--vud-indicator)]" : "bg-[var(--vud-rule-disabled)]"
       } ${trans}`}
     />
   );
@@ -135,7 +135,7 @@ export const Stepper = ({
   const last = steps.length - 1;
 
   return (
-    <div className={["w-full", vertical ? "" : "px-4", className].filter(Boolean).join(" ")}>
+    <div className={["vud-font w-full", vertical ? "" : "px-4", className].filter(Boolean).join(" ")}>
       <ul className={`m-0 flex list-none p-0 ${vertical ? "flex-col" : "flex-row"}`}>
         {steps.map((child, i) =>
           cloneElement(child, {

@@ -48,16 +48,16 @@ export const FormGroup = ({
     : children;
 
   return (
-    <div className={["flex flex-col gap-1", className].filter(Boolean).join(" ")}>
+    <div className={["vud-font flex flex-col gap-1", className].filter(Boolean).join(" ")}>
       {label != null && label !== "" && (
-        <label htmlFor={fieldId} className="text-sm font-semibold text-[#252626]">
+        <label htmlFor={fieldId} className="text-sm font-semibold text-[var(--vud-ink)]">
           {label}
-          {required && <span className="ml-0.5 text-[#a12036]">*</span>}
+          {required && <span className="ml-0.5 text-[var(--vud-danger-ink)]">*</span>}
         </label>
       )}
       {field}
       {describe && (
-        <span id={descId} className={`text-xs ${hasError ? "text-[#a12036]" : "text-[#6f7271]"}`}>
+        <span id={descId} className={`text-xs ${hasError ? "text-[var(--vud-danger-ink)]" : "text-[var(--vud-ink-subtle)]"}`}>
           {hasError ? error : helperText}
         </span>
       )}

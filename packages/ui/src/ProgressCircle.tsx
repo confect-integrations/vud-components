@@ -54,7 +54,7 @@ export const ProgressCircle = ({
     <div
       role="img"
       aria-label={ariaLabel}
-      className={["relative inline-flex shrink-0", className]
+      className={["vud-font relative inline-flex shrink-0", className]
         .filter(Boolean)
         .join(" ")}
       style={{ width: d, height: d }}
@@ -66,7 +66,7 @@ export const ProgressCircle = ({
           cy={center}
           r={r}
           fill="none"
-          stroke="#bcbcbc"
+          style={{ stroke: "var(--vud-track)" }}
           strokeWidth={stroke}
         />
         <circle
@@ -74,7 +74,7 @@ export const ProgressCircle = ({
           cy={center}
           r={r}
           fill="none"
-          stroke="#1482cc"
+          style={{ stroke: "var(--vud-accent)" }}
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -83,7 +83,7 @@ export const ProgressCircle = ({
         />
       </svg>
       <span
-        className={`absolute inset-0 flex items-center justify-center font-medium text-[#252626] ${font}`}
+        className={`absolute inset-0 flex items-center justify-center font-medium text-[var(--vud-ink)] ${font}`}
       >
         {Math.round(pct)}%
       </span>

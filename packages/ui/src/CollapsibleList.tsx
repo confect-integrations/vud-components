@@ -69,7 +69,7 @@ export const ListContainer = ({
 }: HTMLAttributes<HTMLDivElement>) => (
   <div
     className={[
-      "overflow-hidden rounded-md border border-[#dadada] bg-white px-8 py-4 shadow-[0_2px_4px_0_rgba(37,38,38,0.08)]",
+      "vud-font overflow-hidden rounded-[var(--vud-radius-md)] border border-[var(--vud-rule)] bg-[var(--vud-surface)] px-8 py-4 shadow-[0_2px_4px_0_rgba(37,38,38,0.08)]",
       className,
     ]
       .filter(Boolean)
@@ -99,7 +99,7 @@ export const ListGroup = ({
         onClick={toggle}
         aria-expanded={open}
         aria-controls={id}
-        className="flex items-center gap-2 py-2 text-base font-semibold text-[#116fae]"
+        className="flex items-center gap-2 py-2 text-base font-semibold text-[var(--vud-link)]"
       >
         <span>{title}</span>
         <Chevron open={open} />
@@ -129,7 +129,7 @@ export const ListGroupItem = ({
         // -mx-8/px-8 lets the open surface bleed to the ListContainer edges.
         "relative -mx-8 px-8 transition-colors",
         open
-          ? "bg-[#f2f2f2] before:absolute before:left-0 before:top-0 before:h-full before:w-[5px] before:bg-[#4e9c54] before:content-['']"
+          ? "bg-[var(--vud-surface-sunk)] before:absolute before:left-0 before:top-0 before:h-full before:w-[5px] before:bg-[var(--vud-indicator)] before:content-['']"
           : "",
         className,
       ]
@@ -142,13 +142,13 @@ export const ListGroupItem = ({
         onClick={toggle}
         aria-expanded={open}
         aria-controls={id}
-        className="flex w-full items-center gap-2 py-3 text-left text-base text-[#252626]"
+        className="flex w-full items-center gap-2 py-3 text-left text-base text-[var(--vud-ink)]"
       >
         <Chevron open={open} />
         <span>{title}</span>
       </button>
       <Collapse open={open} id={id}>
-        <div className="pb-3 pl-5 text-sm text-[#252626]">{children}</div>
+        <div className="pb-3 pl-5 text-sm text-[var(--vud-ink)]">{children}</div>
       </Collapse>
     </div>
   );

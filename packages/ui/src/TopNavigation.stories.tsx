@@ -3,7 +3,7 @@ import { TopNavigation, TopNavigationItem } from "./TopNavigation";
 
 const Brand = () => (
   <>
-    <span className="flex h-7 w-7 items-center justify-center rounded bg-white text-sm font-bold text-[#252626]">
+    <span className="flex h-7 w-7 items-center justify-center rounded bg-white text-sm font-bold text-[var(--vud-ink)]">
       V
     </span>
     Visma App
@@ -13,10 +13,10 @@ const Brand = () => (
 // For the light `subtle` bar the brand/actions need dark-on-light treatment.
 const BrandDark = () => (
   <>
-    <span className="flex h-7 w-7 items-center justify-center rounded bg-[#252626] text-sm font-bold text-white">
+    <span className="flex h-7 w-7 items-center justify-center rounded bg-[var(--vud-ink)] text-sm font-bold text-white">
       V
     </span>
-    <span className="text-[#252626]">Visma App</span>
+    <span className="text-[var(--vud-ink)]">Visma App</span>
   </>
 );
 
@@ -27,7 +27,7 @@ const Actions = () => (
 );
 
 const ActionsDark = () => (
-  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e3e6ea] text-sm font-bold text-[#252626]">
+  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--vud-secondary-hover)] text-sm font-bold text-[var(--vud-ink)]">
     JM
   </span>
 );

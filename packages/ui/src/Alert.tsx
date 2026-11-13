@@ -23,10 +23,10 @@ export type AlertProps = {
 
 // VUD-aligned tints: soft background, accent border, readable text — one per severity.
 const STYLES: Record<AlertType, { container: string; icon: InformativeIconName }> = {
-  info: { container: "bg-[#e7f2f9] border-[#1482cc] text-[#11537f]", icon: "info" },
-  success: { container: "bg-[#e7f4ec] border-[#2d7048] text-[#1e4d31]", icon: "success" },
-  warning: { container: "bg-[#fbf0e2] border-[#c26800] text-[#7a4100]", icon: "warning" },
-  error: { container: "bg-[#fbeaed] border-[#cc334c] text-[#8f2333]", icon: "error" },
+  info: { container: "bg-[var(--vud-info-surface)] border-[var(--vud-info)] text-[var(--vud-info-ink)]", icon: "info" },
+  success: { container: "bg-[var(--vud-alert-success-surface)] border-[var(--vud-success)] text-[var(--vud-success-ink)]", icon: "success" },
+  warning: { container: "bg-[var(--vud-alert-warning-surface)] border-[var(--vud-warning)] text-[var(--vud-alert-warning-ink)]", icon: "warning" },
+  error: { container: "bg-[var(--vud-alert-danger-surface)] border-[var(--vud-danger)] text-[var(--vud-alert-danger-ink)]", icon: "error" },
 };
 
 /**
@@ -50,7 +50,7 @@ export const Alert = ({
   return (
     <div
       role="alert"
-      className={["flex items-start gap-3 rounded-lg border p-4", s.container, className]
+      className={["vud-font flex items-start gap-3 rounded-[var(--vud-radius-lg)] border p-4", s.container, className]
         .filter(Boolean)
         .join(" ")}
     >

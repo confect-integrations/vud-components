@@ -60,5 +60,5 @@ export const Gallery: Story = {
 };
 
 export const Colored: Story = {
-  args: { name: "settings", color: "#2d7048", size: "lg" },
+  args: { name: "settings", color: "var(--vud-success)", size: "lg" },
 };

@@ -24,27 +24,27 @@ type ButtonProps = {
 /** VUD button palette (light theme defaults): text / background / border / shadow + hover/active. */
 const VARIANTS: Record<ButtonVariant, string> = {
   default:
-    "text-[#252626] bg-white border-[#8a8a8a] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] " +
-    "hover:bg-[#d2eafa] hover:border-[#1482cc] active:bg-[#f2f2f2]",
+    "text-[var(--vud-ink)] bg-[var(--vud-surface)] border-[var(--vud-rule-strong)] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] " +
+    "hover:bg-[var(--vud-surface-hover)] hover:border-[var(--vud-accent)] active:bg-[var(--vud-surface-sunk)]",
   primary:
-    "text-white bg-[#2d7048] border-[#2d7048] shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] " +
-    "hover:bg-[#28633f] hover:border-[#28633f] active:bg-[#254934]",
+    "text-[var(--vud-primary-contrast)] bg-[var(--vud-primary)] border-[var(--vud-primary)] shadow-[0_2px_4px_0_rgba(49,98,69,0.16)] " +
+    "hover:bg-[var(--vud-primary-hover)] hover:border-[var(--vud-primary-hover)] active:bg-[var(--vud-primary-active)]",
   secondary:
-    "text-[#252626] bg-[#f2f2f2] border-[#f2f2f2] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] " +
-    "hover:bg-[#e3e6ea] hover:border-[#e3e6ea] active:bg-[#d6dade]",
+    "text-[var(--vud-ink)] bg-[var(--vud-secondary)] border-[var(--vud-secondary)] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] " +
+    "hover:bg-[var(--vud-secondary-hover)] hover:border-[var(--vud-secondary-hover)] active:bg-[var(--vud-secondary-active)]",
   danger:
-    "text-white bg-[#cc334c] border-[#cc334c] shadow-[0_2px_4px_0_rgba(204,51,76,0.16)] " +
-    "hover:bg-[#b32d43] hover:border-[#b32d43] active:bg-[#99263a]",
-  link: "text-[#116fae] bg-transparent border-transparent shadow-none hover:underline",
+    "text-white bg-[var(--vud-danger)] border-[var(--vud-danger)] shadow-[0_2px_4px_0_rgba(204,51,76,0.16)] " +
+    "hover:bg-[var(--vud-danger-hover)] hover:border-[var(--vud-danger-hover)] active:bg-[var(--vud-danger-active)]",
+  link: "text-[var(--vud-link)] bg-transparent border-transparent shadow-none hover:underline",
 };
 
 /** Flat colours for the clip-path direction shape (drawn via CSS custom properties). */
 const DIRECTION_COLORS: Record<ButtonVariant, { surface: string; border: string; text: string }> = {
-  default: { surface: "#ffffff", border: "#8a8a8a", text: "#252626" },
-  primary: { surface: "#2d7048", border: "#2d7048", text: "#ffffff" },
-  secondary: { surface: "#f2f2f2", border: "#f2f2f2", text: "#252626" },
-  danger: { surface: "#cc334c", border: "#cc334c", text: "#ffffff" },
-  link: { surface: "transparent", border: "transparent", text: "#116fae" },
+  default: { surface: "var(--vud-surface)", border: "var(--vud-rule-strong)", text: "var(--vud-ink)" },
+  primary: { surface: "var(--vud-primary)", border: "var(--vud-primary)", text: "var(--vud-primary-contrast)" },
+  secondary: { surface: "var(--vud-secondary)", border: "var(--vud-secondary)", text: "var(--vud-ink)" },
+  danger: { surface: "var(--vud-danger)", border: "var(--vud-danger)", text: "white" },
+  link: { surface: "transparent", border: "transparent", text: "var(--vud-link)" },
 };
 
 const SIZES: Record<ButtonSize, string> = {
@@ -53,12 +53,12 @@ const SIZES: Record<ButtonSize, string> = {
 };
 
 const COMMON =
-  "items-center justify-center gap-2 select-none whitespace-nowrap align-middle font-normal leading-tight cursor-pointer transition-colors";
+  "vud-font items-center justify-center gap-2 select-none whitespace-nowrap align-middle font-normal leading-tight cursor-pointer transition-colors";
 
 // Greyed-out look for the disabled state (omitted while loading, which keeps the
 // variant colours). Wins over hover since it's a later variant in the cascade.
 const DISABLED =
-  "disabled:cursor-not-allowed disabled:text-[#8a8a8a] disabled:bg-white disabled:border-[#c0c0c0] disabled:shadow-none";
+  "disabled:cursor-not-allowed disabled:text-[var(--vud-ink-faint)] disabled:bg-[var(--vud-surface)] disabled:border-[var(--vud-rule-disabled)] disabled:shadow-none";
 
 /** Inline spinner that inherits the button's text colour; self-animating, no CSS dep. */
 const ButtonSpinner = () => (
@@ -152,7 +152,7 @@ export const Button = ({
 
     classes = [
       COMMON,
-      "rounded-lg border",
+      "rounded-[var(--vud-radius-lg)] border",
       // Loading keeps the variant colour (just a wait cursor); disabled greys out.
       loading ? "cursor-progress" : DISABLED,
       shape,

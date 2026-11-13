@@ -2,7 +2,8 @@
 
    Scoped on purpose: this ships Tailwind's utilities (scanned from the built JS)
    + the prefixed component CSS, but deliberately omits Tailwind's preflight and
-   does NOT emit font-family or the colour palette onto :root. That way importing
+   does NOT emit font-family or the colour palette onto :root (only the prefixed
+   --vud-* theme variables, which nothing else reads). That way importing
    this file never restyles the host or fights its theme tokens (e.g. --font-sans),
    regardless of import order.
 
@@ -19,7 +20,7 @@
 @source "../dist/**/*.js";
 
 /* Keep theme tokens off the host's :root where they'd collide: drop the font
-   families and the full colour palette (components use VUD hex values directly),
+   families and the full colour palette (components use the --vud-* variables in theme.css),
    keeping only white/black, which utilities like bg-white/text-white need. */
 @theme {
   --font-sans: initial;
@@ -29,5 +30,8 @@
   --color-white: #fff;
   --color-black: #000;
 }
+
+/* Theme variables (--vud-*) with the VUD defaults; see theme.css. */
+@import "./theme.css";
 
 @import "./vud-components.css";

@@ -48,13 +48,13 @@ export const Dropdown = ({ trigger, align = "left", children, className }: Dropd
   );
 
   return (
-    <div ref={ref} className={["relative inline-block", className].filter(Boolean).join(" ")}>
+    <div ref={ref} className={["vud-font relative inline-block", className].filter(Boolean).join(" ")}>
       {triggerEl}
       {open && (
         <div
           role="menu"
           onClick={() => setOpen(false)}
-          className={`absolute z-50 mt-1 min-w-[180px] rounded-[4px] border border-[#dadada] bg-white py-1 shadow-[0_2px_8px_0_rgba(37,38,38,0.16)] ${
+          className={`vud-font absolute z-50 mt-1 min-w-[180px] rounded-[var(--vud-radius-sm)] border border-[var(--vud-rule)] bg-[var(--vud-surface)] py-1 shadow-[0_2px_8px_0_rgba(37,38,38,0.16)] ${
             align === "right" ? "right-0" : "left-0"
           }`}
         >
@@ -83,10 +83,10 @@ export const DropdownItem = ({ disabled = false, destructive = false, onClick, c
     className={[
       "flex w-full items-center gap-2 px-4 py-2 text-left text-sm transition-colors",
       disabled
-        ? "cursor-not-allowed text-[#8a8a8a]"
+        ? "cursor-not-allowed text-[var(--vud-ink-faint)]"
         : destructive
-          ? "text-[#cc334c] hover:bg-[#ffedef]"
-          : "text-[#252626] hover:bg-[#d2eafa]",
+          ? "text-[var(--vud-danger)] hover:bg-[var(--vud-danger-surface)]"
+          : "text-[var(--vud-ink)] hover:bg-[var(--vud-surface-hover)]",
       className,
     ]
       .filter(Boolean)
@@ -96,4 +96,4 @@ export const DropdownItem = ({ disabled = false, destructive = false, onClick, c
   </button>
 );
 
-export const DropdownDivider = () => <div className="my-1 h-px bg-[#dadada]" role="separator" />;
+export const DropdownDivider = () => <div className="my-1 h-px bg-[var(--vud-rule)]" role="separator" />;

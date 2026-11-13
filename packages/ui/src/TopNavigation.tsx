@@ -8,31 +8,31 @@ export type TopNavVariant = "primary" | "default" | "subtle";
 // for when the nav sits under a host application's own (dark) top bar.
 const VARIANT_VARS: Record<TopNavVariant, CSSProperties> = {
   primary: {
-    "--tn-bg": "#252626",
-    "--tn-fg": "#ffffff",
-    "--tn-active-fg": "#ffffff",
+    "--tn-bg": "var(--vud-nav-primary)",
+    "--tn-fg": "var(--vud-nav-contrast)",
+    "--tn-active-fg": "var(--vud-nav-contrast)",
     "--tn-border": "rgba(255,255,255,0.10)",
     "--tn-hover": "rgba(255,255,255,0.08)",
     "--tn-active": "rgba(255,255,255,0.08)",
-    "--tn-indicator": "#ffffff",
+    "--tn-indicator": "var(--vud-nav-contrast)",
   } as CSSProperties,
   default: {
-    "--tn-bg": "#0d5788",
-    "--tn-fg": "#ffffff",
-    "--tn-active-fg": "#ffffff",
+    "--tn-bg": "var(--vud-nav-default)",
+    "--tn-fg": "var(--vud-nav-contrast)",
+    "--tn-active-fg": "var(--vud-nav-contrast)",
     "--tn-border": "rgba(255,255,255,0.10)",
     "--tn-hover": "rgba(255,255,255,0.08)",
     "--tn-active": "rgba(255,255,255,0.08)",
-    "--tn-indicator": "#ffffff",
+    "--tn-indicator": "var(--vud-nav-contrast)",
   } as CSSProperties,
   subtle: {
-    "--tn-bg": "#ffffff",
-    "--tn-fg": "#494a4a",
-    "--tn-active-fg": "#1482cc",
-    "--tn-border": "#e3e6ea",
-    "--tn-hover": "#f2f2f2",
+    "--tn-bg": "var(--vud-surface)",
+    "--tn-fg": "var(--vud-ink-muted)",
+    "--tn-active-fg": "var(--vud-accent)",
+    "--tn-border": "var(--vud-rule-subtle)",
+    "--tn-hover": "var(--vud-surface-sunk)",
     "--tn-active": "transparent",
-    "--tn-indicator": "#1482cc",
+    "--tn-indicator": "var(--vud-accent)",
   } as CSSProperties,
 };
 
@@ -61,7 +61,7 @@ export const TopNavigation = ({
     aria-label="Main"
     style={VARIANT_VARS[variant]}
     className={[
-      "flex w-full items-stretch bg-[var(--tn-bg)] text-[var(--tn-fg)]",
+      "vud-font flex w-full items-stretch bg-[var(--tn-bg)] text-[var(--tn-fg)]",
       // Toned-down bar reads as a sub menu: shorter, a hairline border (no shadow).
       variant === "subtle"
         ? "h-12 border-b border-[var(--tn-border)]"

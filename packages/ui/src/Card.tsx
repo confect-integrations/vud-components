@@ -23,18 +23,18 @@ type CardProps = {
 } & Omit<HTMLAttributes<HTMLElement>, "title">;
 
 const SURFACE_BG: Record<CardVariant, string> = {
-  default: "bg-white",
-  secondary: "bg-[#f2f2f2]",
-  primary: "bg-white",
+  default: "bg-[var(--vud-surface)]",
+  secondary: "bg-[var(--vud-surface-sunk)]",
+  primary: "bg-[var(--vud-surface)]",
 };
 
 // Literal shadow strings (Tailwind can't see runtime-concatenated values).
-// border = 1px inset #8a8a8a; accent = 4px green left bar for selected items.
+// border = 1px inset rule-strong; accent = 4px indicator bar for selected items.
 const SHADOW = {
-  border: "shadow-[inset_0_0_0_1px_#8a8a8a]",
-  borderSelected: "shadow-[inset_4px_0_0_0_#4e9c54,inset_0_0_0_1px_#8a8a8a]",
+  border: "shadow-[inset_0_0_0_1px_var(--vud-rule-strong)]",
+  borderSelected: "shadow-[inset_4px_0_0_0_var(--vud-indicator),inset_0_0_0_1px_var(--vud-rule-strong)]",
   none: "shadow-none",
-  noneSelected: "shadow-[inset_4px_0_0_0_#4e9c54]",
+  noneSelected: "shadow-[inset_4px_0_0_0_var(--vud-indicator)]",
 };
 
 export const Card = ({
@@ -68,14 +68,14 @@ export const Card = ({
       : SHADOW.none;
 
   const classes = [
-    "w-full rounded-xl border-0 p-4 text-left text-base text-[#252626] no-underline",
+    "vud-font w-full rounded-[var(--vud-radius-xl)] border-0 p-4 text-left text-base text-[var(--vud-ink)] no-underline",
     row
       ? "flex flex-row items-center justify-between gap-4"
       : "block",
     SURFACE_BG[variant],
     shadow,
     showHover &&
-      "cursor-pointer transition-colors hover:bg-[#d2eafa] hover:shadow-[inset_0_0_0_1px_#1482cc]",
+      "cursor-pointer transition-colors hover:bg-[var(--vud-surface-hover)] hover:shadow-[inset_0_0_0_1px_var(--vud-accent)]",
     className,
   ]
     .filter(Boolean)
@@ -104,15 +104,15 @@ export const CardHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElemen
 );
 
 export const CardTitle = ({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) => (
-  <h3 className={cn("text-base font-bold text-[#252626]", className)} {...props} />
+  <h3 className={cn("text-base font-bold text-[var(--vud-ink)]", className)} {...props} />
 );
 
 export const CardDescription = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => (
-  <p className={cn("text-sm text-[#6f7271]", className)} {...props} />
+  <p className={cn("text-sm text-[var(--vud-ink-subtle)]", className)} {...props} />
 );
 
 export const CardContent = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("text-base text-[#252626]", className)} {...props} />
+  <div className={cn("text-base text-[var(--vud-ink)]", className)} {...props} />
 );
 
 export const CardFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (

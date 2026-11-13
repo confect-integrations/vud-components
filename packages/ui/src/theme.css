@@ -1,0 +1,106 @@
+/* CON-1415: theme variables. Every colour, radius and the font the components
+   use is read from a --vud-* custom property, so an app can restyle the library
+   without touching components. The defaults are the VUD values the components
+   had hard-coded up to 0.3.0: an app that sets nothing looks exactly as before.
+
+   They sit in the `theme` layer on purpose: an unlayered app rule such as
+   `:root { --vud-primary: #5c0e27; }` (or one in a later layer, e.g. `base`)
+   wins regardless of import order. Names describe the role, not the colour.
+   Shipped inside styles.css; the Storybook preview imports it directly.
+   This is the only file in src/ allowed to contain hex colours, besides the
+   white/black tokens in styles.css (enforced by scripts/check-colors.mjs). */
+@layer theme {
+  :root,
+  :host {
+    /* Primary action (primary button, error-page call to action) */
+    --vud-primary: #2d7048;
+    --vud-primary-hover: #28633f;
+    --vud-primary-active: #254934;
+    --vud-primary-contrast: #ffffff; /* text on primary */
+
+    /* Secondary button */
+    --vud-secondary: #f2f2f2;
+    --vud-secondary-hover: #e3e6ea;
+    --vud-secondary-active: #d6dade;
+
+    /* Interactive accent: hover borders, checked boxes, active tab, progress */
+    --vud-accent: #1482cc;
+    --vud-accent-strong: #116fae; /* current stepper step, info toast stripe, blue spinner */
+    --vud-accent-contrast: #ffffff; /* checkmark and radio dot on accent */
+    --vud-link: #116fae;
+    --vud-focus: #1482cc; /* focus rings, outlines and focus borders */
+
+    /* Selected / "on" state (switch, selected pill, wizard steps) */
+    --vud-selected: #316245;
+    --vud-indicator: #4e9c54; /* selection bar on cards, passed stepper steps */
+
+    /* Status */
+    --vud-danger: #cc334c;
+    --vud-danger-hover: #b32d43;
+    --vud-danger-active: #99263a;
+    --vud-danger-surface: #ffedef;
+    --vud-danger-ink: #a12036; /* error text on light surfaces */
+    --vud-warning: #c26800;
+    --vud-warning-surface: #fcf2dc;
+    --vud-warning-ink: #803b00;
+    --vud-success: #2d7048;
+    --vud-success-surface: #eaf4ea;
+    --vud-success-ink: #1e4d31;
+    --vud-info: #1482cc;
+    --vud-info-surface: #e7f2f9;
+    --vud-info-ink: #11537f;
+    --vud-info-strong: #0d5788; /* info badge */
+
+    /* Text */
+    --vud-ink: #252626;
+    --vud-ink-muted: #494a4a; /* placeholders, icon buttons, secondary text */
+    --vud-ink-subtle: #6f7271; /* descriptions, help text */
+    --vud-ink-faint: #8a8a8a; /* disabled and inactive text */
+
+    /* Surfaces */
+    --vud-surface: #ffffff;
+    --vud-surface-sunk: #f2f2f2; /* disabled fields, zebra rows, secondary cards */
+    --vud-surface-hover: #d2eafa;
+
+    /* Lines */
+    --vud-rule: #dadada; /* dividers, panel borders */
+    --vud-rule-strong: #8a8a8a; /* field and control borders */
+    --vud-rule-subtle: #e3e6ea; /* border of the subtle top navigation */
+    --vud-rule-disabled: #c0c0c0; /* disabled borders, upcoming stepper steps */
+    --vud-track: #bcbcbc; /* empty part of progress bars and circles */
+
+    /* Top navigation: primary = dark bar, default = blue bar */
+    --vud-nav-primary: #252626;
+    --vud-nav-default: #0d5788;
+    --vud-nav-contrast: #ffffff;
+
+    /* Radii */
+    --vud-radius-sm: 4px; /* fields, checkboxes, menus */
+    --vud-radius-md: 0.375rem; /* toasts, tooltips, collapsible lists */
+    --vud-radius-lg: 0.5rem; /* buttons, alerts */
+    --vud-radius-xl: 0.75rem; /* cards */
+
+    /* --vud-font-sans is deliberately left unset: components then inherit the
+       host font, as before. Set it to give the components their own family. */
+
+    /* Fine-tuning: VUD uses slightly different tints in a few places. */
+    --vud-alert-success-surface: #e7f4ec;
+    --vud-alert-warning-surface: #fbf0e2;
+    --vud-alert-warning-ink: #7a4100;
+    --vud-alert-danger-surface: #fbeaed;
+    --vud-alert-danger-ink: #8f2333;
+    --vud-spinner-blue-track: #99cbec;
+    --vud-spinner-green-track: #afd4af;
+    --vud-spinner-grey-snake: #959799;
+  }
+}
+
+/* Component roots carry `vud-font`. While --vud-font-sans is unset the
+   declaration is invalid at computed-value time and font-family falls back to
+   inheriting, i.e. exactly the old behaviour. In the components layer so a
+   font utility passed through className still wins. */
+@layer components {
+  .vud-font {
+    font-family: var(--vud-font-sans);
+  }
+}

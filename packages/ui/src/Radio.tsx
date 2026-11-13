@@ -30,18 +30,18 @@ export const Radio = ({
   const inputId = id ?? autoId;
 
   const boxColor = disabled
-    ? "border-[#8a8a8a] bg-[#f2f2f2]"
+    ? "border-[var(--vud-rule-strong)] bg-[var(--vud-surface-sunk)]"
     : checked
-      ? "border-[#1482cc] bg-[#1482cc]"
-      : "border-[#8a8a8a] bg-white";
-  const dotColor = disabled ? "bg-[#8a8a8a]" : "bg-white";
+      ? "border-[var(--vud-accent)] bg-[var(--vud-accent)]"
+      : "border-[var(--vud-rule-strong)] bg-[var(--vud-surface)]";
+  const dotColor = disabled ? "bg-[var(--vud-ink-faint)]" : "bg-[var(--vud-accent-contrast)]";
 
   return (
     <label
       htmlFor={inputId}
       className={[
-        "inline-flex select-none items-start gap-2 text-sm",
-        disabled ? "cursor-not-allowed text-[#8a8a8a]" : "cursor-pointer text-[#252626]",
+        "vud-font inline-flex select-none items-start gap-2 text-sm",
+        disabled ? "cursor-not-allowed text-[var(--vud-ink-faint)]" : "cursor-pointer text-[var(--vud-ink)]",
         className,
       ]
         .filter(Boolean)
@@ -61,7 +61,7 @@ export const Radio = ({
       <span
         className={[
           "relative mt-px flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors",
-          "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#1482cc]",
+          "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--vud-focus)]",
           boxColor,
         ].join(" ")}
       >

@@ -85,7 +85,7 @@ export const Modal = ({
   if (!mounted || !portalEl) return null;
 
   const dialogClasses = [
-    "relative flex flex-col border border-[#dadada] bg-white px-12 pb-10 pt-12 text-[#252626]",
+    "vud-font relative flex flex-col border border-[var(--vud-rule)] bg-[var(--vud-surface)] px-12 pb-10 pt-12 text-[var(--vud-ink)]",
     "shadow-[0_5px_10px_0_rgba(37,38,38,0.12)] transition-all duration-300 ease-out focus:outline-none",
     SIZE[size],
     entered ? "scale-100 opacity-100" : "scale-95 opacity-0",
@@ -117,10 +117,10 @@ export const Modal = ({
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="absolute right-6 top-6 z-10 inline-flex size-6 items-center justify-center rounded transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1482cc]"
+            className="absolute right-6 top-6 z-10 inline-flex size-6 items-center justify-center rounded transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--vud-focus)]"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M1.5 1.5l11 11m0-11l-11 11" stroke="#494A4A" strokeWidth="1.6" strokeLinecap="round" />
+              <path d="M1.5 1.5l11 11m0-11l-11 11" style={{ stroke: "var(--vud-ink-muted)" }} strokeWidth="1.6" strokeLinecap="round" />
             </svg>
           </button>
           {children}
@@ -140,7 +140,7 @@ export const ModalHeader = ({ children, className, ...props }: SectionProps) => 
     <header
       id={titleId}
       className={[
-        "mb-4 shrink-0 pr-8 text-xl font-bold leading-snug text-[#252626] [&_:is(h1,h2,h3,h4,h5,h6)]:m-0 [&_:is(h1,h2,h3,h4,h5,h6)]:text-xl [&_:is(h1,h2,h3,h4,h5,h6)]:font-bold",
+        "mb-4 shrink-0 pr-8 text-xl font-bold leading-snug text-[var(--vud-ink)] [&_:is(h1,h2,h3,h4,h5,h6)]:m-0 [&_:is(h1,h2,h3,h4,h5,h6)]:text-xl [&_:is(h1,h2,h3,h4,h5,h6)]:font-bold",
         className,
       ]
         .filter(Boolean)

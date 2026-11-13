@@ -29,6 +29,7 @@ export const Table = ({
     <table
       className={[
         "vud-table",
+        "vud-font",
         active && "vud-table-active",
         hover && "vud-table-hover",
         condensed && "vud-table-condensed",

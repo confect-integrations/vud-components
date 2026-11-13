@@ -34,12 +34,12 @@ export const PillsItem = ({
   const isDisabled = state === "disabled";
 
   const stateClasses = isDisabled
-    ? "cursor-not-allowed border-[#c0c0c0] bg-white text-[#8a8a8a] shadow-none"
+    ? "cursor-not-allowed border-[var(--vud-rule-disabled)] bg-[var(--vud-surface)] text-[var(--vud-ink-faint)] shadow-none"
     : isActive
       ? __type === "primary"
-        ? "cursor-default border-[#316245] bg-[#316245] text-white shadow-[0_2px_4px_0_rgba(49,98,69,0.16)]"
-        : "cursor-default border-[#8a8a8a] bg-[#f2f2f2] text-[#252626] shadow-none"
-      : "border-[#8a8a8a] bg-white text-[#252626] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] hover:border-[#1482cc] hover:bg-[#d2eafa] focus-visible:border-[#1482cc] focus-visible:shadow-[inset_0_0_0_1px_#1482cc]";
+        ? "cursor-default border-[var(--vud-selected)] bg-[var(--vud-selected)] text-white shadow-[0_2px_4px_0_rgba(49,98,69,0.16)]"
+        : "cursor-default border-[var(--vud-rule-strong)] bg-[var(--vud-surface-sunk)] text-[var(--vud-ink)] shadow-none"
+      : "border-[var(--vud-rule-strong)] bg-[var(--vud-surface)] text-[var(--vud-ink)] shadow-[0_2px_4px_0_rgba(37,38,38,0.08)] hover:border-[var(--vud-accent)] hover:bg-[var(--vud-surface-hover)] focus-visible:border-[var(--vud-focus)] focus-visible:shadow-[inset_0_0_0_1px_var(--vud-focus)]";
 
   return (
     <button
@@ -47,7 +47,7 @@ export const PillsItem = ({
       disabled={isDisabled}
       aria-pressed={isActive}
       className={[
-        "inline-flex items-center justify-center rounded-full border font-normal outline-none transition-colors",
+        "vud-font inline-flex items-center justify-center rounded-full border font-normal outline-none transition-colors",
         SIZE[__size],
         stateClasses,
         className,

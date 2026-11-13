@@ -39,8 +39,8 @@ export const CardList = ({
   const Tag = as as ElementType;
   const layout =
     orientation === "grid"
-      ? `grid gap-4 ${COLUMNS[columns]}`
-      : "flex flex-col gap-2";
+      ? `vud-font grid gap-4 ${COLUMNS[columns]}`
+      : "vud-font flex flex-col gap-2";
 
   const classes = [layout, as === "ul" ? "m-0 list-none p-0" : "", className]
     .filter(Boolean)

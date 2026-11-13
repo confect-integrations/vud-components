@@ -6,9 +6,9 @@ export type TooltipPlacement = "top" | "bottom" | "left" | "right";
 export type TooltipVariant = "default" | "note" | "error";
 
 const VARIANT: Record<TooltipVariant, string> = {
-  default: "border-[#8a8a8a] bg-white text-[#252626]",
-  note: "border-[#c26800] bg-[#fcf2dc] text-[#803b00]",
-  error: "border-[#cc334c] bg-[#ffedef] text-[#a12036]",
+  default: "border-[var(--vud-rule-strong)] bg-[var(--vud-surface)] text-[var(--vud-ink)]",
+  note: "border-[var(--vud-warning)] bg-[var(--vud-warning-surface)] text-[var(--vud-warning-ink)]",
+  error: "border-[var(--vud-danger)] bg-[var(--vud-danger-surface)] text-[var(--vud-danger-ink)]",
 };
 
 const PLACEMENT: Record<TooltipPlacement, string> = {
@@ -55,7 +55,7 @@ export const Tooltip = ({
           role="tooltip"
           id={id}
           className={[
-            "pointer-events-none absolute z-[1070] w-max max-w-[260px] rounded-md border px-3 py-2 text-xs leading-snug shadow-[0_5px_10px_0_rgba(37,38,38,0.12)]",
+            "vud-font pointer-events-none absolute z-[1070] w-max max-w-[260px] rounded-[var(--vud-radius-md)] border px-3 py-2 text-xs leading-snug shadow-[0_5px_10px_0_rgba(37,38,38,0.12)]",
             VARIANT[variant],
             PLACEMENT[placement],
             className,

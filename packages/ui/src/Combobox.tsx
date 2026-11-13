@@ -116,9 +116,9 @@ export const Combobox = ({
   };
 
   return (
-    <div ref={rootRef} className={["relative", className].filter(Boolean).join(" ")}>
+    <div ref={rootRef} className={["vud-font relative", className].filter(Boolean).join(" ")}>
       {label && (
-        <label htmlFor={inputId} className="mb-1 block text-sm text-[#252626]">
+        <label htmlFor={inputId} className="mb-1 block text-sm text-[var(--vud-ink)]">
           {label}
         </label>
       )}
@@ -151,7 +151,7 @@ export const Combobox = ({
             type="button"
             aria-label={clearAriaLabel}
             onClick={clear}
-            className="absolute right-9 top-1/2 -translate-y-1/2 text-[#494a4a] hover:text-[#252626]"
+            className="absolute right-9 top-1/2 -translate-y-1/2 text-[var(--vud-ink-muted)] hover:text-[var(--vud-ink)]"
           >
             <ClearX />
           </button>
@@ -164,7 +164,7 @@ export const Combobox = ({
             setOpen((o) => !o);
             inputRef.current?.focus();
           }}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#1482cc] disabled:text-[#8a8a8a]"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--vud-accent)] disabled:text-[var(--vud-ink-faint)]"
         >
           <Chevron open={open} />
         </button>
@@ -173,10 +173,10 @@ export const Combobox = ({
         <ul
           id={listId}
           role="listbox"
-          className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-[4px] border border-[#dadada] bg-white py-1 font-normal shadow-[0_2px_4px_0_rgba(37,38,38,0.12)]"
+          className="vud-font absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-[var(--vud-radius-sm)] border border-[var(--vud-rule)] bg-[var(--vud-surface)] py-1 font-normal shadow-[0_2px_4px_0_rgba(37,38,38,0.12)]"
         >
           {filtered.length === 0 ? (
-            <li className="px-4 py-2 text-sm text-[#8a8a8a]">{noSuggestionLabel}</li>
+            <li className="px-4 py-2 text-sm text-[var(--vud-ink-faint)]">{noSuggestionLabel}</li>
           ) : (
             filtered.map((o, i) => (
               <li
@@ -188,8 +188,8 @@ export const Combobox = ({
                   e.preventDefault();
                   choose(o);
                 }}
-                className={`cursor-pointer px-4 py-2 text-sm text-[#252626] ${
-                  i === highlight ? "bg-[#d2eafa]" : ""
+                className={`cursor-pointer px-4 py-2 text-sm text-[var(--vud-ink)] ${
+                  i === highlight ? "bg-[var(--vud-surface-hover)]" : ""
                 }`}
               >
                 {o.text}

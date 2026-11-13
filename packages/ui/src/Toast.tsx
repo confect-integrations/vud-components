@@ -34,10 +34,10 @@ export const useToast = (): ToastApi => {
 };
 
 const VARIANT: Record<ToastVariant, string> = {
-  info: "border-l-[#116fae] bg-[#e7f2f9]",
-  success: "border-l-[#2d7048] bg-[#eaf4ea]",
-  warning: "border-l-[#c26800] bg-[#fcf2dc]",
-  error: "border-l-[#cc334c] bg-[#ffedef]",
+  info: "border-l-[var(--vud-accent-strong)] bg-[var(--vud-info-surface)]",
+  success: "border-l-[var(--vud-success)] bg-[var(--vud-success-surface)]",
+  warning: "border-l-[var(--vud-warning)] bg-[var(--vud-warning-surface)]",
+  error: "border-l-[var(--vud-danger)] bg-[var(--vud-danger-surface)]",
 };
 
 const POSITION: Record<ToastPosition, string> = {
@@ -57,14 +57,14 @@ const ToastCard = ({ toast, onDismiss }: { toast: ToastItem; onDismiss: (id: num
   return (
     <div
       role="status"
-      className={`pointer-events-auto flex w-[360px] max-w-[calc(100vw-2rem)] items-start gap-3 rounded-md border border-l-4 border-[#dadada] px-4 py-3 text-sm text-[#252626] shadow-[0_5px_10px_0_rgba(37,38,38,0.12)] ${VARIANT[toast.variant]}`}
+      className={`vud-font pointer-events-auto flex w-[360px] max-w-[calc(100vw-2rem)] items-start gap-3 rounded-[var(--vud-radius-md)] border border-l-4 border-[var(--vud-rule)] px-4 py-3 text-sm text-[var(--vud-ink)] shadow-[0_5px_10px_0_rgba(37,38,38,0.12)] ${VARIANT[toast.variant]}`}
     >
       <div className="flex-1">{toast.message}</div>
       <button
         type="button"
         onClick={() => onDismiss(toast.id)}
         aria-label="Dismiss"
-        className="-mr-1 shrink-0 rounded p-0.5 text-[#494a4a] transition-colors hover:bg-black/5"
+        className="-mr-1 shrink-0 rounded p-0.5 text-[var(--vud-ink-muted)] transition-colors hover:bg-black/5"
       >
         <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />

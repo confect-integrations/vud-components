@@ -42,8 +42,8 @@ export const Switch = ({
     <label
       htmlFor={inputId}
       className={[
-        "inline-flex select-none items-center gap-3 text-sm",
-        disabled ? "cursor-not-allowed text-[#8a8a8a]" : "cursor-pointer text-[#252626]",
+        "vud-font inline-flex select-none items-center gap-3 text-sm",
+        disabled ? "cursor-not-allowed text-[var(--vud-ink-faint)]" : "cursor-pointer text-[var(--vud-ink)]",
         className,
       ]
         .filter(Boolean)
@@ -63,9 +63,9 @@ export const Switch = ({
       <span
         className={[
           "relative inline-flex shrink-0 items-center rounded-full border transition-colors",
-          "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#1482cc]",
+          "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--vud-focus)]",
           s.track,
-          checked ? "border-[#2d7048] bg-[#316245]" : "border-[#8a8a8a] bg-white",
+          checked ? "border-[var(--vud-primary)] bg-[var(--vud-selected)]" : "border-[var(--vud-rule-strong)] bg-[var(--vud-surface)]",
           disabled && "opacity-50",
         ]
           .filter(Boolean)
@@ -75,7 +75,7 @@ export const Switch = ({
           className={[
             "absolute rounded-full border bg-white transition-transform",
             s.knob,
-            checked ? `${s.on} border-white` : "border-[#8a8a8a]",
+            checked ? `${s.on} border-white` : "border-[var(--vud-rule-strong)]",
           ].join(" ")}
         />
       </span>

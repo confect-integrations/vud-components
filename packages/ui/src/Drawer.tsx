@@ -96,8 +96,8 @@ export const Drawer = ({
   if (!mounted || !portalEl) return null;
 
   const panelClasses = [
-    "fixed inset-y-0 right-0 z-[1030] flex flex-col overflow-hidden",
-    "rounded-l-[24px] border border-[#DADADA] bg-white pt-8",
+    "vud-font fixed inset-y-0 right-0 z-[1030] flex flex-col overflow-hidden",
+    "rounded-l-[24px] border border-[var(--vud-rule)] bg-[var(--vud-surface)] pt-8",
     "shadow-[0_5px_10px_0_rgba(37,38,38,0.12)]",
     "transition-transform duration-300 ease-in-out will-change-transform",
     "focus:outline-none",
@@ -130,7 +130,7 @@ export const Drawer = ({
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-[48px] top-8 z-10 inline-flex size-6 items-center justify-center rounded transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1482cc]"
+          className="absolute right-[48px] top-8 z-10 inline-flex size-6 items-center justify-center rounded transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--vud-focus)]"
         >
           <svg
             width="14"
@@ -141,7 +141,7 @@ export const Drawer = ({
           >
             <path
               d="M1.5 1.5l11 11m0-11l-11 11"
-              stroke="#494A4A"
+              style={{ stroke: "var(--vud-ink-muted)" }}
               strokeWidth="1.6"
               strokeLinecap="round"
             />
@@ -163,7 +163,7 @@ export const DrawerHeader = ({ children, className, ...props }: SectionProps) =>
     <header
       id={titleId}
       className={[
-        "shrink-0 px-12 pb-4 pt-12 text-base font-semibold text-[#252626]",
+        "shrink-0 px-12 pb-4 pt-12 text-base font-semibold text-[var(--vud-ink)]",
         className,
       ]
         .filter(Boolean)
@@ -179,7 +179,7 @@ export const DrawerHeader = ({ children, className, ...props }: SectionProps) =>
 export const DrawerBody = ({ children, className, ...props }: SectionProps) => (
   <div
     className={[
-      "min-h-0 flex-1 overflow-y-auto px-12 pb-12 pt-4 text-base text-[#252626] [&>*:first-child]:mt-0",
+      "min-h-0 flex-1 overflow-y-auto px-12 pb-12 pt-4 text-base text-[var(--vud-ink)] [&>*:first-child]:mt-0",
       className,
     ]
       .filter(Boolean)
@@ -194,7 +194,7 @@ export const DrawerBody = ({ children, className, ...props }: SectionProps) => (
 export const DrawerFooter = ({ children, className, ...props }: SectionProps) => (
   <footer
     className={[
-      "flex shrink-0 items-center justify-end gap-2 border-t border-[#DADADA] px-12 py-8",
+      "flex shrink-0 items-center justify-end gap-2 border-t border-[var(--vud-rule)] px-12 py-8",
       className,
     ]
       .filter(Boolean)

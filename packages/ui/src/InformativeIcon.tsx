@@ -6,11 +6,11 @@ export type InformativeIconSize = "sm" | "md" | "lg";
 // Self-contained VUD-style informative icons (coloured shape + white glyph),
 // so icon-bearing components don't depend on the external icon CSS.
 const COLOR: Record<InformativeIconName, string> = {
-  info: "#1482cc",
-  success: "#2d7048",
-  warning: "#c26800",
-  error: "#cc334c",
-  help: "#6f7271",
+  info: "var(--vud-info)",
+  success: "var(--vud-success)",
+  warning: "var(--vud-warning)",
+  error: "var(--vud-danger)",
+  help: "var(--vud-ink-subtle)",
 };
 
 // Token sizes, consistent with the rest of the library (sm/md/lg). A raw number
@@ -48,15 +48,15 @@ export const InformativeIcon = ({
       {...props}
     >
       {name === "warning" ? (
-        <path d="M8 1.2 15 13.6a1 1 0 0 1-.87 1.5H1.87A1 1 0 0 1 1 13.6L8 1.2Z" fill={fill} />
+        <path d="M8 1.2 15 13.6a1 1 0 0 1-.87 1.5H1.87A1 1 0 0 1 1 13.6L8 1.2Z" style={{ fill }} />
       ) : (
-        <circle cx="8" cy="8" r="8" fill={fill} />
+        <circle cx="8" cy="8" r="8" style={{ fill }} />
       )}
 
       {name === "success" && (
         <path
           d="M4.4 8.2 6.9 10.6 11.6 5.4"
-          stroke="#fff"
+          stroke="white"
           strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -67,12 +67,12 @@ export const InformativeIcon = ({
         <>
           <path
             d="M6.2 6.1a1.9 1.9 0 1 1 2.6 1.8c-.6.3-.9.7-.9 1.4v.3"
-            stroke="#fff"
+            stroke="white"
             strokeWidth="1.4"
             fill="none"
             strokeLinecap="round"
           />
-          <circle cx="8" cy="11.6" r="0.95" fill="#fff" />
+          <circle cx="8" cy="11.6" r="0.95" fill="white" />
         </>
       )}
 
@@ -81,8 +81,8 @@ export const InformativeIcon = ({
         <>
           {name === "info" ? (
             <>
-              <circle cx="8" cy="4.6" r="1" fill="#fff" />
-              <rect x="7.05" y="6.7" width="1.9" height="5.1" rx="0.95" fill="#fff" />
+              <circle cx="8" cy="4.6" r="1" fill="white" />
+              <rect x="7.05" y="6.7" width="1.9" height="5.1" rx="0.95" fill="white" />
             </>
           ) : (
             <>
@@ -92,9 +92,9 @@ export const InformativeIcon = ({
                 width="1.9"
                 height={name === "warning" ? "4.6" : "5"}
                 rx="0.95"
-                fill="#fff"
+                fill="white"
               />
-              <circle cx="8" cy={name === "warning" ? "12" : "11.6"} r="0.95" fill="#fff" />
+              <circle cx="8" cy={name === "warning" ? "12" : "11.6"} r="0.95" fill="white" />
             </>
           )}
         </>

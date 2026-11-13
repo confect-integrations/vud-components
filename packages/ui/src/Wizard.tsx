@@ -145,7 +145,7 @@ export const WizardDropdownItem = ({
         aria-expanded={open}
         aria-label={ariaLabel}
         onClick={() => setOpen((o) => !o)}
-        className="flex h-full w-full items-center justify-center text-[#252626]"
+        className="flex h-full w-full items-center justify-center text-[var(--vud-ink)]"
       >
         <DotsIcon />
       </button>
@@ -165,7 +165,7 @@ export type WizardProps = {
 
 /** Container for the arrow-tab steps. */
 export const Wizard = ({ children, className }: WizardProps) => (
-  <nav className={["vud-wizard", className].filter(Boolean).join(" ")} aria-label="Progress">
+  <nav className={["vud-font vud-wizard", className].filter(Boolean).join(" ")} aria-label="Progress">
     {children}
   </nav>
 );

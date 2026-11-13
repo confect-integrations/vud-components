@@ -29,17 +29,17 @@ export const HorizontalLoadingBar = ({
   const s = SIZE[size];
   const hasLabel = label != null && label !== "";
   return (
-    <div className={["w-full", className].filter(Boolean).join(" ")} {...props}>
+    <div className={["vud-font w-full", className].filter(Boolean).join(" ")} {...props}>
       <div
         role="progressbar"
         aria-busy="true"
         aria-label={typeof label === "string" && label ? label : "Loading"}
-        className={`relative w-full overflow-hidden bg-[#bcbcbc] ${s.track}`}
+        className={`relative w-full overflow-hidden bg-[var(--vud-track)] ${s.track}`}
       >
         <span className={"vud-hlb-bar"} />
       </div>
       {hasLabel && (
-        <span className={`block truncate text-sm text-[#494a4a] ${s.labelMt}`}>
+        <span className={`block truncate text-sm text-[var(--vud-ink-muted)] ${s.labelMt}`}>
           {label}
         </span>
       )}

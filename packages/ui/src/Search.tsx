@@ -60,7 +60,7 @@ export const Search = ({
 
   return (
     <div className={["relative", className].filter(Boolean).join(" ")}>
-      <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#494a4a]">
+      <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--vud-ink-muted)]">
         <Magnifier />
       </span>
       <input
@@ -83,7 +83,7 @@ export const Search = ({
           type="button"
           aria-label={ariaLabelClearSearch}
           onClick={() => setVal("")}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#494a4a] hover:text-[#252626]"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--vud-ink-muted)] hover:text-[var(--vud-ink)]"
         >
           <ClearX />
         </button>

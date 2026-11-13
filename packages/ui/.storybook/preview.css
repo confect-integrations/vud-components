@@ -1,3 +1,4 @@
 @import "tailwindcss";
+@import "../src/theme.css";
 @import "../src/vud-components.css";
 @import "@vismaux/vud-icons/dist/css/vud-icons.min.css";
